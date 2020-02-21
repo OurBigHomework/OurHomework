@@ -106,14 +106,14 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
-              <widget class="QLineEdit" name="lineEdit">
+              <widget class="QLineEdit" name="UserName">
                <property name="styleSheet">
                 <string notr="true">margin:5px;</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_2">
+              <widget class="QLineEdit" name="password">
                <property name="styleSheet">
                 <string notr="true">margin:5px;</string>
                </property>
@@ -126,7 +126,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="registerButton">
              <property name="text">
               <string>注册</string>
              </property>
@@ -146,7 +146,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_2">
+            <widget class="QPushButton" name="loginButton">
              <property name="text">
               <string>登录</string>
              </property>

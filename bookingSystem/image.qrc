@@ -3,6 +3,10 @@
         <file>sunshine.jpg</file>
         <file>sky1.jpg</file>
         <file>sky.jpg</file>
+        <file>toRight.png</file>
+        <file>toLeft.png</file>
+        <file>toLeft1.png</file>
+        <file>plane.jpg</file>
     </qresource>
     <qresource prefix="/">
         <file>../image/sky.jpg</file>

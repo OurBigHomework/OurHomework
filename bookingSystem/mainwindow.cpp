@@ -3,7 +3,7 @@
 #include<QPainter>
 #include<QPixmap>
 #include<QPaintEvent>
-#include<QPalette>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -11,14 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 }
-void MainWindow::setBackgroundImage(QString path)
-{
-    QPixmap pixmap = QPixmap(path).scaled(this->size());
-        QPalette palette(this->palette());
-        palette.setBrush(QPalette::Background, QBrush(pixmap));
-        this->setPalette(palette);
 
-}
 void MainWindow::paintEvent(QPaintEvent *event)
 {
     QPainter p(this);
@@ -29,3 +22,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_loginButton_clicked()
+{
+    close();
+    ww.showMaximized();
+
+}
+
+void MainWindow::on_registerButton_clicked()
+{
+    close();
+    w.showMaximized();
+
+}
