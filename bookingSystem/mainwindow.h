@@ -16,6 +16,7 @@ public:
     ~MainWindow();
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void setBackgroundImage(QString path);
 
 private:
     Ui::MainWindow *ui;
