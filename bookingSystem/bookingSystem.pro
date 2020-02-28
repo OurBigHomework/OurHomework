@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    chooseticketdialog.cpp \
     loginpart.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
     ticketitems.cpp
 
 HEADERS += \
+    chooseticketdialog.h \
     loginpart.h \
     mainwindow.h \
     myexcel.h \
@@ -32,6 +34,7 @@ HEADERS += \
     ticketitems.h
 
 FORMS += \
+    chooseticketdialog.ui \
     loginpart.ui \
     mainwindow.ui \
     registerpart.ui

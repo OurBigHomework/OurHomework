@@ -4,8 +4,7 @@
 #include<QCoreApplication>
 #include<QFile>
 #include<QMessageBox>
-#include<QListWidget>
-#include<QListWidgetItem>
+
 loginPart::loginPart(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::loginPart)
@@ -39,6 +38,15 @@ loginPart::loginPart(QWidget *parent) :
 
 
 }
+void loginPart::deleteItems(QListWidget *list, int count)
+{
+    for(int i=0;i<count;i++)
+    {
+        QListWidgetItem*item=list->takeItem(0);
+        delete item;
+    }
+}
+
 QString loginPart::getCalDate()
 {
     QString date=ui->beginTime->selectedDate().toString("yyyy-MM-dd");
@@ -63,7 +71,8 @@ void loginPart::showSearchPage(int begin, int end, QString date,int &time)
    int line=begin*e.place.size()+end+1;
     //qDebug()<<line<<res[line][0]<<res[line][1]<<begin<<end<<e.place[begin]<<e.place[end];
     ui->list->setViewMode(QListView::ListMode);
-    QString placeInfo=e.place[begin].append("(Starting Station)------->> ").append(e.place[end]).append("(Terminus)");
+    QString temp=e.place[begin];
+    QString placeInfo=temp.append("(Starting Station)------->> ").append(e.place[end]).append("(Terminus)");
     QString t;
     if(res[line][2].toString()=="yes")t="Remaning Tickets";
     else t="No Remaning Tickets";
@@ -96,6 +105,10 @@ void loginPart::showSearchPage(int begin, int end, QString date,int &time)
 void loginPart::on_buttonSearch_clicked()
 {
 
+    if(ui->list->count()>0)
+    {
+        deleteItems(ui->list,ui->list->count());
+    }
     QString begDate=getCalDate();
     QString begPlace=ui->start->currentText();
     QString endPlace=ui->end->currentText();
@@ -106,12 +119,16 @@ void loginPart::on_buttonSearch_clicked()
     }
 
     int a=-1,b=-1;
+
     for(int i=0;i<e.place.size();i++)
     {
+
         if(e.place[i]==begPlace)a=i;
+
         if(e.place[i]==endPlace)b=i;
         if(a!=-1&&b!=-1)break;
     }
+
 
     showSearchPage(a,b,begDate,timeIndex);
 }

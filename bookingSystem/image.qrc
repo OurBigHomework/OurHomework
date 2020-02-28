@@ -8,9 +8,11 @@
         <file>toLeft1.png</file>
         <file>plane.jpg</file>
         <file>ticketImg1.jpg</file>
+        <file>icon1.png</file>
     </qresource>
     <qresource prefix="/">
         <file>../image/sky.jpg</file>
         <file>../image/sky1.jpg</file>
+        <file>icon1.png</file>
     </qresource>
 </RCC>

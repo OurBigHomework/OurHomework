@@ -1,6 +1,7 @@
 #include "ticketitems.h"
 #include<QPalette>
 #include<QFont>
+
 ticketItems::ticketItems(QWidget *parent) : QWidget(parent)
 {
 init();
@@ -78,4 +79,10 @@ void ticketItems::setPlaneName(QString text)
 void ticketItems::setHasTicket(QString text)
 {
     hasTicket->setText(text);
+}
+
+void ticketItems::mousePressEvent(QMouseEvent *event)
+{
+
+dia.show();
 }

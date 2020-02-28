@@ -5,6 +5,8 @@
 #include "myexcel.h"
 #include <QMainWindow>
 #include<QPainter>
+#include<QListWidget>
+#include<QListWidgetItem>
 #include<QVariantList>
 #include <ActiveQt/QAxWidget>
 #include<ActiveQt/QAxObject>
@@ -25,9 +27,11 @@ public:
     QAxObject* getWorksheet();
     QString getCalDate();
     void showSearchPage(int begin,int end,QString date,int &time);
+    void deleteItems(QListWidget*list,int count);
 
 protected:
     void paintEvent(QPaintEvent *event);
+
 
 
 

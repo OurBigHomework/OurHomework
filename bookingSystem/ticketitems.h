@@ -4,7 +4,7 @@
 #include <QWidget>
 #include<QLabel>
 #include<QPushButton>
-
+#include "chooseticketdialog.h"
 class ticketItems : public QWidget
 {
     Q_OBJECT
@@ -19,9 +19,11 @@ public:
     void setPlaces(QString text);
     void setHasTicket(QString text);
     void setTime(QString text);
+    void mousePressEvent(QMouseEvent *event) override;
+
 
 private:
-
+chooseTicketDialog dia;
     QLabel *pic;
     QLabel*planeName;
     QLabel*places;
