@@ -3,7 +3,8 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
-
+QT +=axcontainer
+QT += core
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -19,12 +20,16 @@ SOURCES += \
     loginpart.cpp \
     main.cpp \
     mainwindow.cpp \
-    registerpart.cpp
+    myexcel.cpp \
+    registerpart.cpp \
+    ticketitems.cpp
 
 HEADERS += \
     loginpart.h \
     mainwindow.h \
-    registerpart.h
+    myexcel.h \
+    registerpart.h \
+    ticketitems.h
 
 FORMS += \
     loginpart.ui \
@@ -37,4 +42,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    Datas.qrc \
     image.qrc

@@ -7,6 +7,7 @@
         <file>toLeft.png</file>
         <file>toLeft1.png</file>
         <file>plane.jpg</file>
+        <file>ticketImg1.jpg</file>
     </qresource>
     <qresource prefix="/">
         <file>../image/sky.jpg</file>

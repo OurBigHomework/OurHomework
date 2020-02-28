@@ -3,12 +3,15 @@
 #include<QPainter>
 #include<QPixmap>
 #include<QPaintEvent>
+#include<QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
 
 }
 
