@@ -10,7 +10,7 @@ class ticketItems : public QWidget
     Q_OBJECT
 public:
     explicit ticketItems(QWidget *parent = nullptr);
-    void init();
+    void init();//初始化UI
     QString getPlaneName();
     QString getPlaces();
     QString getTime();

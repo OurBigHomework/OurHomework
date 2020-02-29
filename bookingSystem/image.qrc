@@ -9,6 +9,17 @@
         <file>plane.jpg</file>
         <file>ticketImg1.jpg</file>
         <file>icon1.png</file>
+        <file>plane1.png</file>
+        <file>plane2.png</file>
+        <file>plane3.png</file>
+        <file>birthday.png</file>
+        <file>head.jpg</file>
+        <file>name.png</file>
+        <file>phone.png</file>
+        <file>sex.png</file>
+        <file>user.png</file>
+        <file>password.png</file>
+        <file>sex2.png</file>
     </qresource>
     <qresource prefix="/">
         <file>../image/sky.jpg</file>

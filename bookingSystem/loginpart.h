@@ -24,10 +24,10 @@ class loginPart : public QMainWindow
 public:
     explicit loginPart(QWidget *parent = nullptr);
     ~loginPart();
-    QAxObject* getWorksheet();
-    QString getCalDate();
-    void showSearchPage(int begin,int end,QString date,int &time);
-    void deleteItems(QListWidget*list,int count);
+    //QAxObject* getWorksheet();
+    QString getCalDate();//获取出发日期
+    void showSearchPage(int begin,int end,QString date,int &time);//展示售票页面
+    void deleteItems(QListWidget*list,int count);//删除QListWidget中的item
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -39,12 +39,17 @@ private slots:
     void on_buttonSearch_clicked();
 
 
+    void on_comeBack_clicked();
+
 private:
     Ui::loginPart *ui;
+
     QList<QList<QVariant>> res;
+    QVector<QString>place;
     myExcel e;
     int timeIndex;
-
+signals:
+    void openMainWindow();
 
 
 };

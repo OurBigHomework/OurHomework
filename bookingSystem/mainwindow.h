@@ -15,6 +15,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    bool accountExist(QString pword,QString uname);//判断账号是否存在
+    void openAgain();//重新打开主窗口
 protected:
     void paintEvent(QPaintEvent *event) override;
     void setBackgroundImage(QString path);
@@ -26,6 +28,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    myExcel excel;
+    QList<QList<QVariant>> accountInfo;
+    QList<QList<QVariant>> indexInfo;
     RegisterPart w;
     loginPart ww;
 };

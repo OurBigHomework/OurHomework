@@ -6,6 +6,8 @@ chooseTicketDialog::chooseTicketDialog(QWidget *parent) :
     ui(new Ui::chooseTicketDialog)
 {
     ui->setupUi(this);
+    setWindowTitle("Choose");
+    setWindowIcon(QIcon(":/new/prefix1/plane3.png"));
 }
 
 chooseTicketDialog::~chooseTicketDialog()

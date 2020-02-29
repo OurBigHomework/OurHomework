@@ -12,25 +12,30 @@ loginPart::loginPart(QWidget *parent) :
     ui->setupUi(this);
     ui->stackedWidget->setFrameShape(QFrame::NoFrame);
     ui->titleText->setFrameShape(QFrame::NoFrame);
-//    HRESULT r = OleInitialize(0);
-//    if (r != S_OK && r != S_FALSE)
-//    {
-//        qWarning("Qt:初始化Ole失败（error %x）",(unsigned int)r);
-//    }
+    setWindowIcon(QIcon(":/new/prefix1/plane1.png"));
 
 
-    e.setPath("D:/OurHomework/bookingSystem/Data/myData1.xlsx");
-    e.init();
-    QVariant var=e.readAll();
-
+    e.setPath("D:/OurHomework/bookingSystem/Data/myData2.xlsx");
+    e.getExcelRLine(1,0,"A1","F1");
+    //e.init();
+    QVariant var=e.readAll(1);
+    myExcel*ee=new myExcel;
+    ee->setPath("D:/OurHomework/bookingSystem/Data/myData.xlsx");
+    place=ee->getExcelVLine(1,0,"A1","A34");
      e.excelToQList(var,res);
      ui->start->clear();
      ui->end->clear();
-     for(int i=0;i<e.place.size();i++)
+//     for(int i=0;i<e.place.size();i++)
+//     {
+
+//         ui->start->addItem(e.place[i]);
+//         ui->end->addItem(e.place[i]);
+//     }
+     for(int i=0;i<place.size();i++)
      {
 
-         ui->start->addItem(e.place[i]);
-         ui->end->addItem(e.place[i]);
+         ui->start->addItem(place[i]);
+         ui->end->addItem(place[i]);
      }
 
 
@@ -53,7 +58,7 @@ QString loginPart::getCalDate()
 
     return date;
 }
-void loginPart::paintEvent(QPaintEvent *event)
+void loginPart::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
     p.setBrush(Qt::white);
@@ -68,19 +73,24 @@ loginPart::~loginPart()
 
 void loginPart::showSearchPage(int begin, int end, QString date,int &time)
 {
-   int line=begin*e.place.size()+end+1;
-    //qDebug()<<line<<res[line][0]<<res[line][1]<<begin<<end<<e.place[begin]<<e.place[end];
+   //int line=begin*e.place.size()+end+1;
+int line=begin*place.size()+end+1;
     ui->list->setViewMode(QListView::ListMode);
-    QString temp=e.place[begin];
-    QString placeInfo=temp.append("(Starting Station)------->> ").append(e.place[end]).append("(Terminus)");
+    //QString temp=e.place[begin];
+    QString temp=place[begin];
+    //QString placeInfo=temp.append("(Starting Station)------->> ").append(e.place[end]).append("(Terminus)");
+     QString placeInfo=temp.append("(Starting Station)------->> ").append(place[end]).append("(Terminus)");
     QString t;
     if(res[line][2].toString()=="yes")t="Remaning Tickets";
     else t="No Remaning Tickets";
 
-    for(int i=3;i<res[0].size();i++)
+    for(int i=1;i<(res[0].size()-3)/2+1;i++)
     {
-        QString p=res[0][i].toString();
-        QString planeText=e.place[begin].left(2).toUpper().append(e.place[end].left(2).toUpper());
+
+        int index=2*i+1;
+        QString p=res[line][index].toString();
+        //QString planeText=e.place[begin].left(2).toUpper().append(e.place[end].left(2).toUpper());
+        QString planeText=place[begin].left(2).toUpper().append(place[end].left(2).toUpper());
         QString pt=planeText.append(p.left(2)).append(p.right(2));
         ticketItems *it=new ticketItems(ui->list);
         it->setTime(p);
@@ -120,15 +130,28 @@ void loginPart::on_buttonSearch_clicked()
 
     int a=-1,b=-1;
 
-    for(int i=0;i<e.place.size();i++)
+//    for(int i=0;i<e.place.size();i++)
+//    {
+
+//        if(e.place[i]==begPlace)a=i;
+
+//        if(e.place[i]==endPlace)b=i;
+//        if(a!=-1&&b!=-1)break;
+//    }
+    for(int i=0;i<place.size();i++)
     {
 
-        if(e.place[i]==begPlace)a=i;
+        if(place[i]==begPlace)a=i;
 
-        if(e.place[i]==endPlace)b=i;
+        if(place[i]==endPlace)b=i;
         if(a!=-1&&b!=-1)break;
     }
 
 
     showSearchPage(a,b,begDate,timeIndex);
+}
+
+void loginPart::on_comeBack_clicked()
+{
+    emit openMainWindow();
 }
