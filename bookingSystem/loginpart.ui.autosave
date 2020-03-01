@@ -412,7 +412,7 @@ background-color: rgb(83, 83, 229);</string>
                          </font>
                         </property>
                         <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
+                         <cursorShape>ArrowCursor</cursorShape>
                         </property>
                         <property name="styleSheet">
                          <string notr="true">color: rgb(255, 255, 255);
@@ -457,7 +457,7 @@ padding:8px 20px;</string>
                          </font>
                         </property>
                         <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
+                         <cursorShape>ArrowCursor</cursorShape>
                         </property>
                         <property name="styleSheet">
                          <string notr="true">color: rgb(255, 255, 255);

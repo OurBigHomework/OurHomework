@@ -22,6 +22,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     myexcel.cpp \
+    passenger.cpp \
     registerpart.cpp \
     ticketitems.cpp
 
@@ -30,6 +31,7 @@ HEADERS += \
     loginpart.h \
     mainwindow.h \
     myexcel.h \
+    passenger.h \
     registerpart.h \
     ticketitems.h
 

@@ -40,6 +40,7 @@ void MainWindow::on_loginButton_clicked()
 
     QString Uname=ui->UserName->text();
     QString Pword=ui->password->text();
+    int index=0;
     if(Uname=="Conservator"&&Pword=="123456")
     {
         hide();
@@ -58,9 +59,16 @@ void MainWindow::on_loginButton_clicked()
             ui->warningText->setVisible(true);
 
         }
-        else if(accountExist(Pword,Uname))
+        else if(accountExist(Pword,Uname,index))
         {
+
             hide();
+            QString rname=accountInfo[index][2].toString();
+            QString phone=accountInfo[index][3].toString();
+            QString birday=accountInfo[index][4].toString();
+            QString sex=accountInfo[index][5].toString();
+            ww.setPassenger(Uname,Pword,birday,sex,rname,phone,index);
+            ww.sendLoginSignal();
             ww.showMaximized();
         }
         else
@@ -81,7 +89,7 @@ void MainWindow::openAgain()
 
 }
 
-bool MainWindow::accountExist(QString pword, QString uname)
+bool MainWindow::accountExist(QString pword, QString uname,int& index)
 {
     QString first=uname.at(0);
     int k=-1;
@@ -123,7 +131,12 @@ bool MainWindow::accountExist(QString pword, QString uname)
     }
     if(flag==1)
     {
-        if(accountInfo[mid][1].toString()==pword)return true;
+        if(accountInfo[mid][1].toString()==pword)
+        {
+            index=mid;
+            return true;
+        }
+
         else return false;
     }else
     {

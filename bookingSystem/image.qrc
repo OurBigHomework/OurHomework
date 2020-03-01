@@ -20,6 +20,9 @@
         <file>user.png</file>
         <file>password.png</file>
         <file>sex2.png</file>
+        <file>head3.jpg</file>
+        <file>head2.jpg</file>
+        <file>feet.jpg</file>
     </qresource>
     <qresource prefix="/">
         <file>../image/sky.jpg</file>
