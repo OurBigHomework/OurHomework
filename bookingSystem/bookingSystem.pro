@@ -18,27 +18,37 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     chooseticketdialog.cpp \
+    flightinfodialog.cpp \
+    flightsinformation.cpp \
     loginpart.cpp \
     main.cpp \
     mainwindow.cpp \
+    managerpart.cpp \
     myexcel.cpp \
+    mythread.cpp \
     passenger.cpp \
     registerpart.cpp \
     ticketitems.cpp
 
 HEADERS += \
     chooseticketdialog.h \
+    flightinfodialog.h \
+    flightsinformation.h \
     loginpart.h \
     mainwindow.h \
+    managerpart.h \
     myexcel.h \
+    mythread.h \
     passenger.h \
     registerpart.h \
     ticketitems.h
 
 FORMS += \
     chooseticketdialog.ui \
+    flightinfodialog.ui \
     loginpart.ui \
     mainwindow.ui \
+    managerpart.ui \
     registerpart.ui
 
 # Default rules for deployment.

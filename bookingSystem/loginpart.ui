@@ -18,32 +18,41 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_26">
+    <property name="spacing">
+     <number>0</number>
+    </property>
     <item>
      <layout class="QGridLayout" name="gridLayout_2">
-      <property name="verticalSpacing">
+      <property name="spacing">
        <number>0</number>
       </property>
+      <item row="0" column="0" colspan="2">
+       <widget class="QLabel" name="label_12">
+        <property name="font">
+         <font>
+          <family>Verdana</family>
+          <pointsize>48</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+border-image: url(:/new/prefix1/sky2.jpg);
+color: rgb(255, 255, 255);
+border:2px solid rgb(52, 112, 222)</string>
+        </property>
+        <property name="text">
+         <string>Air Booking System</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="1">
        <layout class="QVBoxLayout" name="verticalLayout_9">
         <property name="spacing">
          <number>0</number>
         </property>
-        <item>
-         <spacer name="verticalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>5</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item>
          <widget class="QLabel" name="titleText">
           <property name="minimumSize">
@@ -75,7 +84,10 @@
           <property name="styleSheet">
            <string notr="true">
 color: rgb(237, 255, 235);
-background-color: rgb(83, 83, 229);</string>
+border:2px solid rgb(74, 95, 231);
+background-color: rgb(59, 39, 212);
+background-color: rgb(20, 121, 215);
+background-color: rgba(59, 39, 212,220);</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
@@ -109,19 +121,31 @@ background-color: rgb(83, 83, 229);</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);</string>
+           <string notr="true">#stackedWidget
+{
+background-color: rgb(255, 255, 255);
+border:1px solid black;
+}
+
+</string>
           </property>
           <property name="currentIndex">
            <number>0</number>
           </property>
           <widget class="QWidget" name="PagePersonalInfo">
            <layout class="QVBoxLayout" name="verticalLayout_11">
+            <property name="spacing">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QFrame" name="frame_3">
               <property name="styleSheet">
                <string notr="true">border:1px bold  rgb(18, 18, 18);</string>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_25">
+               <property name="spacing">
+                <number>0</number>
+               </property>
                <item>
                 <widget class="QWidget" name="widget_4" native="true">
                  <property name="styleSheet">
@@ -412,7 +436,7 @@ background-color: rgb(83, 83, 229);</string>
                          </font>
                         </property>
                         <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
+                         <cursorShape>ArrowCursor</cursorShape>
                         </property>
                         <property name="styleSheet">
                          <string notr="true">color: rgb(255, 255, 255);
@@ -457,7 +481,7 @@ padding:8px 20px;</string>
                          </font>
                         </property>
                         <property name="cursor">
-                         <cursorShape>PointingHandCursor</cursorShape>
+                         <cursorShape>ArrowCursor</cursorShape>
                         </property>
                         <property name="styleSheet">
                          <string notr="true">color: rgb(255, 255, 255);
@@ -517,14 +541,14 @@ padding:8px 20px;</string>
                      <widget class="QLabel" name="label_13">
                       <property name="minimumSize">
                        <size>
-                        <width>180</width>
-                        <height>120</height>
+                        <width>150</width>
+                        <height>100</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>180</width>
-                        <height>120</height>
+                        <width>150</width>
+                        <height>100</height>
                        </size>
                       </property>
                       <property name="text">
@@ -582,22 +606,6 @@ padding:8px 20px;</string>
          <number>0</number>
         </property>
         <item>
-         <spacer name="verticalSpacer_8">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>5</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <spacer name="horizontalSpacer_2">
@@ -623,6 +631,13 @@ padding:8px 20px;</string>
               <height>16777215</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">border:1px solid black;
+border-right:none;
+padding:10px 10px 30px 10px;
+
+</string>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -647,43 +662,46 @@ padding:8px 20px;</string>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>50</height>
+            <height>10</height>
            </size>
           </property>
          </spacer>
         </item>
         <item>
-         <widget class="QWidget" name="widget" native="true">
+         <widget class="QWidget" name="Twidget" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>600</width>
+            <height>600</height>
+           </size>
+          </property>
           <property name="styleSheet">
            <string notr="true"/>
           </property>
           <layout class="QGridLayout" name="gridLayout">
-           <item row="0" column="0" rowspan="8" colspan="3">
-            <widget class="Line" name="line_5">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+           <property name="topMargin">
+            <number>20</number>
+           </property>
+           <property name="bottomMargin">
+            <number>20</number>
+           </property>
+           <item row="4" column="2" rowspan="2">
+            <widget class="QLabel" name="label_9">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
              </property>
-            </widget>
-           </item>
-           <item row="0" column="4" colspan="2">
-            <widget class="QLabel" name="label_10">
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>14</pointsize>
-               <weight>50</weight>
-               <bold>false</bold>
-              </font>
+             <property name="styleSheet">
+              <string notr="true">border:0px;</string>
              </property>
              <property name="text">
-              <string>Personal Information</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <string>出发日期：</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="3" colspan="3">
+           <item row="1" column="2" colspan="3">
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -725,6 +743,9 @@ padding:8px 20px;</string>
                      <height>25</height>
                     </size>
                    </property>
+                   <property name="styleSheet">
+                    <string notr="true">border:0px;</string>
+                   </property>
                    <property name="text">
                     <string/>
                    </property>
@@ -743,6 +764,9 @@ padding:8px 20px;</string>
                      <width>100</width>
                      <height>25</height>
                     </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border:0px;</string>
                    </property>
                    <property name="text">
                     <string/>
@@ -821,6 +845,9 @@ padding:8px 20px;</string>
                    <pointsize>10</pointsize>
                   </font>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">border:0px;</string>
+                 </property>
                  <property name="text">
                   <string>origin</string>
                  </property>
@@ -845,6 +872,9 @@ padding:8px 20px;</string>
                      <height>20</height>
                     </size>
                    </property>
+                   <property name="styleSheet">
+                    <string notr="true">border:0px;</string>
+                   </property>
                    <property name="text">
                     <string/>
                    </property>
@@ -863,6 +893,9 @@ padding:8px 20px;</string>
                      <width>200</width>
                      <height>20</height>
                     </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border:0px;</string>
                    </property>
                    <property name="text">
                     <string/>
@@ -891,6 +924,9 @@ padding:8px 20px;</string>
                    <pointsize>10</pointsize>
                   </font>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">border:0px;</string>
+                 </property>
                  <property name="text">
                   <string>terminus</string>
                  </property>
@@ -903,7 +939,58 @@ padding:8px 20px;</string>
              </item>
             </layout>
            </item>
-           <item row="1" column="6">
+           <item row="2" column="1" rowspan="3" colspan="7">
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="Line" name="line_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3" colspan="2">
+            <widget class="QLabel" name="label_10">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>14</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border:0px;</string>
+             </property>
+             <property name="text">
+              <string>Personal Information</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="7">
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="5">
             <spacer name="horizontalSpacer">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -919,7 +1006,7 @@ padding:8px 20px;</string>
              </property>
             </spacer>
            </item>
-           <item row="1" column="7" colspan="2">
+           <item row="1" column="6" colspan="2">
             <layout class="QVBoxLayout" name="verticalLayout_8">
              <item>
               <spacer name="verticalSpacer_5">
@@ -941,7 +1028,7 @@ padding:8px 20px;</string>
               <widget class="QPushButton" name="buttonSearch">
                <property name="minimumSize">
                 <size>
-                 <width>80</width>
+                 <width>100</width>
                  <height>50</height>
                 </size>
                </property>
@@ -960,7 +1047,7 @@ background-color: rgb(59, 39, 212);
 padding:8px 20px;</string>
                </property>
                <property name="text">
-                <string>查询</string>
+                <string>search</string>
                </property>
               </widget>
              </item>
@@ -979,34 +1066,7 @@ padding:8px 20px;</string>
              </item>
             </layout>
            </item>
-           <item row="2" column="2" rowspan="3" colspan="7">
-            <widget class="Line" name="line">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="4" rowspan="4">
-            <widget class="Line" name="line_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="3" rowspan="2">
-            <widget class="QLabel" name="label_9">
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>出发日期：</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="5" rowspan="2" colspan="3">
+           <item row="5" column="3" rowspan="2" colspan="4">
             <widget class="QCalendarWidget" name="beginTime">
              <property name="minimumSize">
               <size>
@@ -1019,29 +1079,6 @@ padding:8px 20px;</string>
                <width>400</width>
                <height>250</height>
               </size>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="8">
-            <spacer name="horizontalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>38</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="7" column="1" colspan="8">
-            <widget class="Line" name="line_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
@@ -1066,32 +1103,15 @@ padding:8px 20px;</string>
         </item>
        </layout>
       </item>
-      <item row="0" column="0" colspan="2">
-       <widget class="QLabel" name="label_12">
-        <property name="font">
-         <font>
-          <family>黑体</family>
-          <pointsize>48</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border-image: url(:/new/prefix1/sky1.jpg);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>航空订票系统</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_6">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="spacing">
+         <number>15</number>
+        </property>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
@@ -1107,6 +1127,9 @@ color: rgb(255, 255, 255);</string>
               <width>100</width>
               <height>100</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border:1px solid black;</string>
             </property>
             <property name="text">
              <string/>
@@ -1192,13 +1215,25 @@ padding:8px 20px;</string>
           <height>0</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(243, 243, 243);</string>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout_5">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+         <property name="topMargin">
+          <number>20</number>
+         </property>
+         <property name="bottomMargin">
+          <number>60</number>
+         </property>
          <item>
           <widget class="QPushButton" name="pushButton_2">
            <property name="minimumSize">
             <size>
              <width>300</width>
-             <height>50</height>
+             <height>60</height>
             </size>
            </property>
            <property name="maximumSize">
@@ -1207,8 +1242,19 @@ padding:8px 20px;</string>
              <height>16777215</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>Bahnschrift SemiLight</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(105, 158, 255);
+background-color: rgb(59, 39, 212);
+color: rgb(255, 255, 255);</string>
+           </property>
            <property name="text">
-            <string>个人信息</string>
+            <string>Personal information</string>
            </property>
           </widget>
          </item>
@@ -1217,7 +1263,7 @@ padding:8px 20px;</string>
            <property name="minimumSize">
             <size>
              <width>300</width>
-             <height>50</height>
+             <height>60</height>
             </size>
            </property>
            <property name="maximumSize">
@@ -1225,6 +1271,10 @@ padding:8px 20px;</string>
              <width>420</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(59, 39, 212);
+color: rgb(255, 255, 255);</string>
            </property>
            <property name="text">
             <string>我的订单</string>
@@ -1236,7 +1286,7 @@ padding:8px 20px;</string>
            <property name="minimumSize">
             <size>
              <width>300</width>
-             <height>50</height>
+             <height>60</height>
             </size>
            </property>
            <property name="maximumSize">
@@ -1244,6 +1294,10 @@ padding:8px 20px;</string>
              <width>420</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(59, 39, 212);
+color: rgb(255, 255, 255);</string>
            </property>
            <property name="text">
             <string>客服中心</string>
@@ -1255,7 +1309,7 @@ padding:8px 20px;</string>
            <property name="minimumSize">
             <size>
              <width>300</width>
-             <height>50</height>
+             <height>60</height>
             </size>
            </property>
            <property name="maximumSize">
@@ -1263,6 +1317,10 @@ padding:8px 20px;</string>
              <width>420</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(59, 39, 212);
+color: rgb(255, 255, 255);</string>
            </property>
            <property name="text">
             <string>系统通知</string>
@@ -1274,7 +1332,7 @@ padding:8px 20px;</string>
            <property name="minimumSize">
             <size>
              <width>300</width>
-             <height>50</height>
+             <height>60</height>
             </size>
            </property>
            <property name="maximumSize">
@@ -1282,6 +1340,10 @@ padding:8px 20px;</string>
              <width>420</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(59, 39, 212);
+color: rgb(255, 255, 255);</string>
            </property>
            <property name="text">
             <string>我的钱包</string>
@@ -1293,7 +1355,7 @@ padding:8px 20px;</string>
            <property name="minimumSize">
             <size>
              <width>300</width>
-             <height>50</height>
+             <height>60</height>
             </size>
            </property>
            <property name="maximumSize">
@@ -1301,6 +1363,10 @@ padding:8px 20px;</string>
              <width>420</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(59, 39, 212);
+color: rgb(255, 255, 255);</string>
            </property>
            <property name="text">
             <string>关于</string>

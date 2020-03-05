@@ -6,19 +6,39 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>785</width>
-    <height>336</height>
+    <width>589</width>
+    <height>333</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-
-background-color: rgb(74, 74, 204);</string>
+   <string notr="true">background-color: rgb(151, 154, 208);
+background-color: rgba(78, 99, 189,220);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_17">
+     <property name="font">
+      <font>
+       <family>Segoe UI Semibold</family>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <italic>true</italic>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(172, 172, 255);
+color: rgb(11, 35, 255);
+color: rgb(234, 235, 249);</string>
+     </property>
+     <property name="text">
+      <string>TICKETS</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="1">
     <spacer name="verticalSpacer">
      <property name="orientation">
@@ -51,7 +71,8 @@ background-color: rgb(74, 74, 204);</string>
    <item row="1" column="1">
     <widget class="QWidget" name="widget" native="true">
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(254, 254, 254);</string>
+      <string notr="true">
+background-color: rgb(245, 245, 245);</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <property name="leftMargin">
@@ -72,85 +93,10 @@ background-color: rgb(74, 74, 204);</string>
       <property name="verticalSpacing">
        <number>16</number>
       </property>
-      <item row="1" column="5">
-       <widget class="QPushButton" name="pushButton">
-        <property name="styleSheet">
-         <string notr="true">
-background-color: rgb(46, 46, 202);
-color: rgb(255, 255, 255);</string>
-        </property>
+      <item row="3" column="2">
+       <widget class="QLabel" name="label_11">
         <property name="text">
-         <string>OK</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="4">
-       <widget class="QSpinBox" name="spinBox_3"/>
-      </item>
-      <item row="2" column="5">
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 46, 202);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>OK</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="4">
-       <widget class="QSpinBox" name="spinBox"/>
-      </item>
-      <item row="2" column="2">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>$120</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>allowance</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>NO.1</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>number of purchases</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QLabel" name="label_14">
-        <property name="text">
-         <string>120</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QLabel" name="label_12">
-        <property name="text">
-         <string>120</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="5">
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 46, 202);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>OK</string>
+         <string>$100</string>
         </property>
        </widget>
       </item>
@@ -173,16 +119,6 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>$150</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="4">
-       <widget class="QSpinBox" name="spinBox_2"/>
-      </item>
       <item row="3" column="1">
        <widget class="QLabel" name="label_8">
         <property name="text">
@@ -190,43 +126,21 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label_2">
+      <item row="3" column="4">
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(46, 46, 202);
+color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
-         <string>level </string>
+         <string>OK</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="label_7">
+      <item row="3" column="3">
+       <widget class="QLabel" name="label_14">
         <property name="text">
-         <string>NO.2</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="QLabel" name="label_11">
-        <property name="text">
-         <string>$100</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_15">
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="image.qrc">:/new/prefix1/icon1.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
+         <string>120</string>
         </property>
        </widget>
       </item>
@@ -256,6 +170,46 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>NO.1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>allowance</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_15">
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="image.qrc">:/new/prefix1/icon1.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>NO.2</string>
+        </property>
+       </widget>
+      </item>
       <item row="2" column="3">
        <widget class="QLabel" name="label_13">
         <property name="text">
@@ -263,28 +217,58 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>level </string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(46, 46, 202);
+color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>OK</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>$120</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>120</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QPushButton" name="pushButton">
+        <property name="styleSheet">
+         <string notr="true">
+background-color: rgb(46, 46, 202);
+color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>OK</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>$150</string>
+        </property>
+       </widget>
+      </item>
      </layout>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label_17">
-     <property name="font">
-      <font>
-       <family>Segoe UI Semibold</family>
-       <pointsize>16</pointsize>
-       <weight>75</weight>
-       <italic>true</italic>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(172, 172, 255);
-color: rgb(11, 35, 255);
-color: rgb(234, 235, 249);</string>
-     </property>
-     <property name="text">
-      <string>TICKETS</string>
-     </property>
     </widget>
    </item>
   </layout>

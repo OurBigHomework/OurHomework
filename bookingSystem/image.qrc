@@ -23,6 +23,12 @@
         <file>head3.jpg</file>
         <file>head2.jpg</file>
         <file>feet.jpg</file>
+        <file>Mhead.jpg</file>
+        <file>sky3.jpg</file>
+        <file>sky4.jpg</file>
+        <file>sky2.jpg</file>
+        <file>sky5.png</file>
+        <file>sky6.jpg</file>
     </qresource>
     <qresource prefix="/">
         <file>../image/sky.jpg</file>

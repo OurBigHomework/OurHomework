@@ -27,8 +27,11 @@ QVector<QString> myExcel::getExcelVLine(int n,int vnum,QString begin,QString end
     QVariant var=cells->dynamicCall("Value");
     QVariantList mylist=var.toList();
     QVector<QString> vec;
+
+
     for(int i=0;i<mylist.size();i++)
     {
+
         vec.append(mylist[i].toList()[vnum].toString());
 
     }
@@ -59,34 +62,12 @@ QVector<QString> myExcel::getExcelRLine(int n,int rnum,QString begin,QString end
 
     }
 
+
     workbook->dynamicCall("Close(Boolean)",false);
     excel.dynamicCall("Quit(void)");
     return vec;
 }
-//void myExcel::init()
-//{
-//        QAxObject excel("Excel.Application");
-//        excel.setProperty("Visible",false);
-//        QAxObject *workbooks = excel.querySubObject("WorkBooks");
-//       workbooks->dynamicCall("Open (const QString&)", QString("D:/OurHomework/bookingSystem/Data/myData.xlsx"));
 
-//        QAxObject *workbook = excel.querySubObject("ActiveWorkBook");//获取活动工作簿
-//        QAxObject*worksheet = workbook->querySubObject("Worksheets(int)", 1);
-//        QVariantList params;
-//        params <<"A1"<< "A34";
-//        QAxObject *cells = worksheet->querySubObject("Range(QVariant,QVariant)",params);
-//        QVariant var=cells->dynamicCall("Value");
-//        QVariantList mylist=var.toList();
-//        for(int i=0;i<mylist.size();i++)
-//        {
-//            place.append(mylist[i].toList()[0].toString());
-
-//        }
-
-//        workbook->dynamicCall("Close(Boolean)",false);
-//        excel.dynamicCall("Quit(void)");
-
-//}
 void myExcel::setPath(QString path)
 {
     this->path=path;

@@ -34,17 +34,30 @@
     <item row="1" column="1" rowspan="2">
      <widget class="QWidget" name="widget" native="true">
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">
+background-color: rgba(255, 255, 255, 100);</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <property name="spacing">
         <number>18</number>
        </property>
+       <property name="leftMargin">
+        <number>20</number>
+       </property>
+       <property name="topMargin">
+        <number>20</number>
+       </property>
+       <property name="rightMargin">
+        <number>20</number>
+       </property>
        <property name="bottomMargin">
-        <number>9</number>
+        <number>20</number>
        </property>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="spacing">
+          <number>15</number>
+         </property>
          <item>
           <widget class="QLabel" name="label">
            <property name="sizePolicy">
@@ -55,18 +68,21 @@
            </property>
            <property name="font">
             <font>
-             <family>Arial Black</family>
-             <pointsize>22</pointsize>
+             <family>Calibri</family>
+             <pointsize>16</pointsize>
              <weight>75</weight>
+             <italic>true</italic>
              <bold>true</bold>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">margin:30px;
-</string>
+            <string notr="true">margin:10px;
+background-color: rgba(255, 255, 255, 0);
+color: rgb(59, 45, 141);
+border:0px;</string>
            </property>
            <property name="text">
-            <string>航空订票系统</string>
+            <string>Air Booking System</string>
            </property>
            <property name="textFormat">
             <enum>Qt::AutoText</enum>
@@ -82,6 +98,19 @@
             <layout class="QVBoxLayout" name="verticalLayout">
              <item>
               <widget class="QLabel" name="label_2">
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">
+color: rgb(59, 45, 141);
+background-color: rgba(255, 255, 255, 0);
+border:0px;</string>
+               </property>
                <property name="text">
                 <string>UserName:</string>
                </property>
@@ -89,6 +118,18 @@
              </item>
              <item>
               <widget class="QLabel" name="label_3">
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(59, 45, 141);
+border:0px;
+background-color: rgba(255, 255, 255, 0);</string>
+               </property>
                <property name="text">
                 <string>Password:</string>
                </property>
@@ -120,6 +161,17 @@
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
             <widget class="QPushButton" name="registerButton">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:rgb(59, 45, 141);
+color: rgb(255, 255, 255);
+border:0px;</string>
+             </property>
              <property name="text">
               <string>Register</string>
              </property>
@@ -140,6 +192,17 @@
            </item>
            <item>
             <widget class="QPushButton" name="loginButton">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:rgb(59, 45, 141);
+color: rgb(255, 255, 255);
+border:0px;</string>
+             </property>
              <property name="text">
               <string>Login</string>
              </property>
@@ -152,7 +215,9 @@
        <item>
         <widget class="QLabel" name="warningText">
          <property name="styleSheet">
-          <string notr="true">color: rgb(255, 32, 3);</string>
+          <string notr="true">color: rgb(255, 32, 3);
+border:0px;
+background-color: rgba(255, 255, 255, 0);</string>
          </property>
          <property name="text">
           <string>Username or password error.</string>

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "registerpart.h"
 #include "loginpart.h"
+#include "managerpart.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -34,5 +35,7 @@ private:
     QList<QList<QVariant>> indexInfo;
     RegisterPart w;
     loginPart ww;
+    managerPart mw;
+
 };
 #endif // MAINWINDOW_H

@@ -14,6 +14,7 @@ loginPart::loginPart(QWidget *parent) :
     ui->titleText->setFrameShape(QFrame::NoFrame);
     setWindowIcon(QIcon(":/new/prefix1/plane1.png"));
 
+
     connect(this,&loginPart::initLogin,this,&loginPart::initPersonalInfo);
 
     e.setPath("D:/OurHomework/bookingSystem/Data/myData2.xlsx");
@@ -170,21 +171,23 @@ void loginPart::on_buttonSearch_clicked()
 
 void loginPart::on_comeBack_clicked()
 {
+
     emit openMainWindow();
 }
 
 void loginPart::on_pushButton_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+    ui->titleText->setText("Personal Information");
 }
 
 void loginPart::on_pushButtonEdit_clicked()
 {
 
-    ui->textEdit->setEnabled(true);
+    ui->textEdit->setReadOnly(false);
 }
 
 void loginPart::on_pushButtonEditOK_clicked()
 {
-    ui->textEdit->setEnabled(false);
+    ui->textEdit->setReadOnly(true);
 }

@@ -1,10 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include<QPainter>
 #include<QPixmap>
 #include<QPaintEvent>
 #include<QDebug>
-
+#include<QElapsedTimer>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -13,12 +14,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->warningText->setVisible(false);
     ui->password->setEchoMode(QLineEdit::Password);
     connect(&ww,&loginPart::openMainWindow,this,&MainWindow::openAgain);
-
+    connect(&mw,&managerPart::comeBack,this,&MainWindow::openAgain);
+    QElapsedTimer timer;
+    timer.start();
     excel.setPath("D:/OurHomework/bookingSystem/Data/Passengers.xlsx");
     QVariant v1=excel.readAll(1);
     excel.excelToQList(v1,accountInfo);
     QVariant v2=excel.readAll(2);
     excel.excelToQList(v2,indexInfo);
+    qDebug()<< timer.elapsed()<<"--main";
 
 
 
@@ -27,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::paintEvent(QPaintEvent *event)
 {
     QPainter p(this);
-    p.drawPixmap(rect(),QPixmap(":/new/prefix1/sky1.jpg"));
+    p.drawPixmap(rect(),QPixmap(":/new/prefix1/sky6.jpg"));
 }
 MainWindow::~MainWindow()
 {
@@ -41,8 +45,9 @@ void MainWindow::on_loginButton_clicked()
     QString Uname=ui->UserName->text();
     QString Pword=ui->password->text();
     int index=0;
-    if(Uname=="Conservator"&&Pword=="123456")
+    if(Uname=="Manager"&&Pword=="123456")
     {
+        mw.show();
         hide();
     }
     else
@@ -85,6 +90,7 @@ void MainWindow::on_loginButton_clicked()
 void MainWindow::openAgain()
 {
     ww.close();
+    ui->password->setText("");
     show();
 
 }
