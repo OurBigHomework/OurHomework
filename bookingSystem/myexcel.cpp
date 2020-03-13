@@ -12,6 +12,20 @@ myExcel::myExcel()
     date="";
     path="";
 }
+int myExcel::sheetCount()
+{
+
+    QAxObject excel("Excel.Application");
+    excel.dynamicCall("setVisible(bool Visible)",false);
+    QAxObject *workbooks = excel.querySubObject("WorkBooks");
+   workbooks->dynamicCall("Open (const QString&)", QString(path));
+
+    QAxObject*workbook=excel.querySubObject("ActiveWorkBook");
+    QAxObject*worksheets=workbook->querySubObject("WorkSheets");
+    int num=worksheets->property("Count").toInt();
+    excel.dynamicCall("Quit(void)");
+    return num;
+}
 QVector<QString> myExcel::getExcelVLine(int n,int vnum,QString begin,QString end)
 {
     QAxObject excel("Excel.Application");
@@ -29,12 +43,14 @@ QVector<QString> myExcel::getExcelVLine(int n,int vnum,QString begin,QString end
     QVector<QString> vec;
 
 
+
     for(int i=0;i<mylist.size();i++)
     {
 
         vec.append(mylist[i].toList()[vnum].toString());
 
     }
+
 
     workbook->dynamicCall("Close(Boolean)",false);
     excel.dynamicCall("Quit(void)");

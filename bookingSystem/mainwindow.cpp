@@ -15,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->password->setEchoMode(QLineEdit::Password);
     connect(&ww,&loginPart::openMainWindow,this,&MainWindow::openAgain);
     connect(&mw,&managerPart::comeBack,this,&MainWindow::openAgain);
+    //connect(&mw,&managerPart::sendInfo,&ww,&loginPart::initPlaneInfo);
+    connect(&ww,&loginPart::sendPlaceAndDate,&mw,&managerPart::getPlaceAndDate);
+    ww.setVars(mw.dia.vars);
     QElapsedTimer timer;
     timer.start();
     excel.setPath("D:/OurHomework/bookingSystem/Data/Passengers.xlsx");
@@ -37,6 +40,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 
 
 void MainWindow::on_loginButton_clicked()

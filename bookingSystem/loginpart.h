@@ -1,7 +1,7 @@
 #ifndef LOGINPART_H
 #define LOGINPART_H
 
-#include <windows.h>
+#include "mythread.h"
 #include "myexcel.h"
 #include <QMainWindow>
 #include<QPainter>
@@ -14,6 +14,7 @@
 #include<QList>
 #include "ticketitems.h"
 #include "passenger.h"
+
 namespace Ui {
 class loginPart;
 }
@@ -26,13 +27,18 @@ public:
     explicit loginPart(QWidget *parent = nullptr);
     ~loginPart();
 
-    //QAxObject* getWorksheet();
+
     QString getCalDate();//获取出发日期
-    void showSearchPage(int begin,int end,QString date,int &time);//展示售票页面
+    void showSearchPage(int begin,int end,QString date);//展示售票页面
     void deleteItems(QListWidget*list,int count);//删除QListWidget中的item
     void setPassenger(QString username,QString password,QString birthday,QString sex,QString name,QString phone,int index);
     void sendLoginSignal();
+    void setVars(QList<QList<QList<QVariant>>>& vars);
+   // void senInitSignal();
     void initPersonalInfo();
+    void initPlaneInfo(QList<QList<QList<QVariant>>>&vars);
+    void initDateAndPlace(QList<QList<QList<QVariant>>>&v);
+    void itemClick(ticketItems*);
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -55,14 +61,20 @@ private slots:
 private:
     Ui::loginPart *ui;
 
-    QList<QList<QVariant>> res;
+    //QList<QList<QVariant>> res;
     QVector<QString>place;
-    myExcel e;
-    int timeIndex;
+    QVector<QString>dates;
+    //myExcel e;
+    //int timeIndex;
     Passenger passenger;
+    QList<QList<QList<QVariant>>> vars;
+    MyThread *th2;
+
 signals:
     void openMainWindow();
     void initLogin();
+    void sendPlaceAndDate(QVector<QString>&place,QVector<QString>&dates);
+
 
 
 };

@@ -4,7 +4,7 @@
 #include<QCoreApplication>
 #include<QFile>
 #include<QMessageBox>
-
+#include "chooseticketdialog.h"
 loginPart::loginPart(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::loginPart)
@@ -13,31 +13,25 @@ loginPart::loginPart(QWidget *parent) :
     ui->stackedWidget->setFrameShape(QFrame::NoFrame);
     ui->titleText->setFrameShape(QFrame::NoFrame);
     setWindowIcon(QIcon(":/new/prefix1/plane1.png"));
+    ui->stackedWidget->setCurrentIndex(0);
 
+  th2=new MyThread;
 
+    th2->setPath("D:/OurHomework/bookingSystem/Data/myData.xlsx");
+    th2->start();
+    qRegisterMetaType <QList<QList<QList<QVariant>>>>("QList<QList<QList<QVariant>>>&");
     connect(this,&loginPart::initLogin,this,&loginPart::initPersonalInfo);
+    connect(th2,&MyThread::isDone,this,&loginPart::initDateAndPlace);
 
-    e.setPath("D:/OurHomework/bookingSystem/Data/myData2.xlsx");
-    e.getExcelRLine(1,0,"A1","F1");
 
-    QVariant var=e.readAll(1);
-    myExcel*ee=new myExcel;
-    ee->setPath("D:/OurHomework/bookingSystem/Data/myData.xlsx");
-    place=ee->getExcelVLine(1,0,"A1","A34");
-     e.excelToQList(var,res);
+
      ui->start->clear();
      ui->end->clear();
-     for(int i=0;i<place.size();i++)
-     {
+}
 
-         ui->start->addItem(place[i]);
-         ui->end->addItem(place[i]);
-     }
-
-
-
-
-
+void loginPart::setVars(QList<QList<QList<QVariant> > > &vars)
+{
+    this->vars=vars;
 }
 
 void loginPart::initPersonalInfo()
@@ -52,10 +46,35 @@ void loginPart::initPersonalInfo()
     ui->Password->setText(QString("Password:").append(passenger.getPassword()));
 }
 
+void loginPart::initDateAndPlace(QList<QList<QList<QVariant>>>&v)
+{
+    th2->quit();
+    th2->wait();
+
+//    qDebug()<<v.size()<<v[0].size()<<v[1].size();
+    for(int i=0;i<v[0].size();i++)
+    {
+        place.push_back(v[0][i][0].toString());
+    }
+    for(int i=0;i<v[1].size();i++)
+    {
+        dates.push_back(v[1][i][0].toString().left(10));
+    }
+         for(int i=0;i<place.size();i++)
+         {
+
+             ui->start->addItem(place[i]);
+             ui->end->addItem(place[i]);
+         }
+    emit sendPlaceAndDate(place,dates);
+    qDebug()<<"d and p init ok";
+}
+
 void loginPart::sendLoginSignal()
 {
     emit initLogin();
 }
+
 
 void loginPart::deleteItems(QListWidget *list, int count)
 {
@@ -66,11 +85,13 @@ void loginPart::deleteItems(QListWidget *list, int count)
     }
 }
 
+
 QString loginPart::getCalDate()
 {
     QString date=ui->beginTime->selectedDate().toString("yyyy-MM-dd");
+    QString week=ui->beginTime->selectedDate().toString("ddd");
 
-    return date;
+    return QString("%1(%2)").arg(date).arg(week);
 }
 void loginPart::paintEvent(QPaintEvent *)
 {
@@ -83,6 +104,18 @@ loginPart::~loginPart()
 {
 
     delete ui;
+}
+void loginPart::initPlaneInfo(QList<QList<QList<QVariant>>>&vars)
+{
+    this->vars=vars;
+    qDebug()<<"LoginPart init ok.";
+
+}
+
+void loginPart::itemClick(ticketItems *it)
+{
+    chooseTicketDialog*dia=new chooseTicketDialog;
+    dia->show();
 }
 
 void loginPart::setPassenger(QString username, QString password,QString birthday,QString sex,QString name,QString phone,int index)
@@ -100,41 +133,65 @@ void loginPart::setPassenger(QString username, QString password,QString birthday
 
 }
 
-void loginPart::showSearchPage(int begin, int end, QString date,int &time)
+void loginPart::showSearchPage(int begin, int end, QString date)
 {
 
-int line=begin*place.size()+end+1;
-    ui->list->setViewMode(QListView::ListMode);
-    QString temp=place[begin];
-     QString placeInfo=temp.append("(Starting Station)------->> ").append(place[end]).append("(Terminus)");
-    QString t;
-    if(res[line][2].toString()=="yes")t="Remaning Tickets";
-    else t="No Remaning Tickets";
-
-    for(int i=1;i<(res[0].size()-3)/2+1;i++)
+    if(vars.isEmpty())
     {
-
-        int index=2*i+1;
-        QString p=res[line][index].toString();
-        QString planeText=place[begin].left(2).toUpper().append(place[end].left(2).toUpper());
-        QString pt=planeText.append(p.left(2)).append(p.right(2));
-        ticketItems *it=new ticketItems(ui->list);
-        it->setTime(p);
-        it->setPlaces(placeInfo);
-
-        it->setHasTicket(t);
-        it->setPlaneName(pt);
-
-        QListWidgetItem*item=new QListWidgetItem(ui->list,0);
-        item->setSizeHint(QSize(580,160));
-        ui->list->setItemWidget(item,it);
-        ui->titleText->setText("Flight Information");
-
-
-
-
+        QMessageBox::information(this,"Tips:","数据正在加载中，请稍后。。。");
+        return;
     }
-    ui->list->show();
+    int flag=-1;
+    qDebug()<<"Psize:"<<place.size()<<"Dsize:"<<dates.size()<<"date:"<<date;
+
+    for(int i=0;i<dates.size();i++)
+    {
+        if(dates[i]==date.left(10))
+        {
+            flag=i;
+            break;
+        }
+    }
+    if(flag==-1)
+    {
+        QMessageBox::information(this,"Tips","Tickets not open on current date.Please re-select the date.");
+    }
+    else
+    {
+        int line=begin*place.size()+end+1;
+            ui->list->setViewMode(QListView::ListMode);
+            QString temp=place[begin];
+             QString placeInfo=temp.append("(Starting Station)------->> ").append(place[end]).append("(Terminus)");
+            QString t=date;
+            QList<QList<QVariant>> res=vars[flag];
+
+
+            for(int i=1;i<(res[0].size()-3)/2+1;i++)
+            {
+
+                int index=2*i+1;
+                int num=2*i+2;
+                QString p=res[line][index].toString();
+                QString planeText=place[begin].left(2).toUpper().append(place[end].left(2).toUpper());
+                QString pt=planeText.append(p.left(2)).append(p.right(2));
+                ticketItems *it=new ticketItems(ui->list);
+                it->setTime(p);
+                it->setPlaces(placeInfo);
+                it->setIndex(index);
+                it->setTicketsNum(res[line][num].toString());
+                it->setHasTicket(t);
+                it->setPlaneName(pt);
+
+                QListWidgetItem*item=new QListWidgetItem(ui->list,0);
+                item->setSizeHint(QSize(600,160));
+                ui->list->setItemWidget(item,it);
+                ui->titleText->setText("Flight Information");
+                connect(it,&ticketItems::itemClicked,this,&loginPart::itemClick);
+
+            }
+            ui->list->show();
+    }
+
 
 }
 
@@ -166,7 +223,7 @@ void loginPart::on_buttonSearch_clicked()
     }
 
 
-    showSearchPage(a,b,begDate,timeIndex);
+    showSearchPage(a,b,begDate);
 }
 
 void loginPart::on_comeBack_clicked()
@@ -185,9 +242,11 @@ void loginPart::on_pushButtonEdit_clicked()
 {
 
     ui->textEdit->setReadOnly(false);
-}
 
+}
 void loginPart::on_pushButtonEditOK_clicked()
 {
     ui->textEdit->setReadOnly(true);
+    ui->textEdit->setCursor(Qt::ArrowCursor);
+
 }

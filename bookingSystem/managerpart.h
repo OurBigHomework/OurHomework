@@ -15,8 +15,12 @@ class managerPart : public QWidget
 
 public:
     explicit managerPart(QWidget *parent = nullptr);
+    FlightInfoDialog dia;
     ~managerPart();
    void showSearchPage(int begin,int end,QString&date, QList<QList<QVariant>>&res);
+   void getInfo(QList<QList<QList<QVariant>>>&vars);
+   void getPlaceAndDate(QVector<QString>&place,QVector<QString>&dates);
+   void itemClick(ticketItems*it);
 
 private slots:
     void on_changeHead_clicked();
@@ -28,11 +32,15 @@ private slots:
     void on_newFlights_clicked();
 
 private:
-    QString formateStr(QString &str,int k);
+    //QString formateStr(QString &str,int k);
     Ui::managerPart *ui;
-    FlightInfoDialog dia;
+
+    QList<QList<QVariant>> res;
+    int line;
 signals:
     void comeBack();
+    void sendInfo(QList<QList<QList<QVariant>>>&vars);
+    //void sendIndex(int i);
 };
 
 #endif // MANAGERPART_H

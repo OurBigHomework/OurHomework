@@ -25,7 +25,9 @@ void MyThread::run()
         excel->setPath(path);
         QList<QVariant> varList;
         QList<QList<QList<QVariant>>> mylist;
-        for(int i=0;i<5;i++)
+
+        int c=excel->sheetCount();
+        for(int i=0;i<c;i++)
         {
             varList.push_back(excel->readAll(i+1));
             QList<QList<QVariant>> res;

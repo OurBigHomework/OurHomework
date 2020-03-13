@@ -47,6 +47,15 @@ void ticketItems::init()
 
 }
 
+QString ticketItems::getTicketsNum()
+{
+    return num;
+}
+void ticketItems::setTicketsNum(QString t)
+{
+    num=t;
+}
+
 QString ticketItems::getTime()
 {
     return time->text();
@@ -80,9 +89,16 @@ void ticketItems::setHasTicket(QString text)
 {
     hasTicket->setText(text);
 }
-
-void ticketItems::mousePressEvent(QMouseEvent *event)
+void ticketItems::setIndex(int i)
+{
+    index=i;
+}
+int ticketItems::getIndex()
+{
+    return index;
+}
+void ticketItems::mousePressEvent(QMouseEvent *)
 {
 
-dia.show();
+emit itemClicked(this);
 }

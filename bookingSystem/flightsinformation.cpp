@@ -10,12 +10,12 @@ FlightsInformation::FlightsInformation(QWidget *parent) : QWidget(parent)
     ePlace=new QLabel(this);
     QFont font;
     font.setPointSize(12);
-    QPalette color;
-    color.setColor(QPalette::Text,Qt::gray);
-    date->setPalette(color);
-    time->setPalette(color);
-    bPlace->setPalette(color);
-    ePlace->setPalette(color);
+//    QPalette color;
+//    color.setColor(QPalette::Text,Qt::gray);
+//    date->setPalette(color);
+//    time->setPalette(color);
+//    bPlace->setPalette(color);
+//    ePlace->setPalette(color);
     date->setFont(font);
     time->setFont(font);
     bPlace->setFont(font);
