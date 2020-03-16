@@ -13,7 +13,7 @@ public:
     void setPhone(QString phone);
     void setBirthday(QString birthday);
     void setName(QString name);
-    void setIndex(int index);
+    void setIndex(int index);//乘客索引
     QString getUsername();
     QString getPassword();
     QString getSex();

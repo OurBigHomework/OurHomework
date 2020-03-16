@@ -16,9 +16,9 @@ class FlightInfoDialog : public QWidget
 public:
     explicit FlightInfoDialog(QWidget *parent = nullptr);
     ~FlightInfoDialog();
-    QList<QList<QList<QVariant>>> vars;
-    QVector<QString>dates;
-    QVector<QString> places;
+    QList<QList<QList<QVariant>>> vars;//三维数组，存储全部的航班信息，如vars【0】【0】【0】表示mydata2第一张表位置为A1的数据
+    QVector<QString>dates;//日期
+    QVector<QString> places;//地点
     int currentTimeIndex;
     int line;
     void changePage(int i);

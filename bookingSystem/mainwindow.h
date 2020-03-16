@@ -21,7 +21,7 @@ public:
     //void getInfo(QList<QList<QVariant>>&res,QVector<QString>&d,QVector<QString> &place);
 protected:
     void paintEvent(QPaintEvent *event) override;
-    void setBackgroundImage(QString path);
+    void setBackgroundImage(QString path);//设置背景图片
 
 private slots:
     void on_loginButton_clicked();
@@ -33,11 +33,11 @@ signals:
 private:
     Ui::MainWindow *ui;
     myExcel excel;
-    QList<QList<QVariant>> accountInfo;
-    QList<QList<QVariant>> indexInfo;
-    RegisterPart w;
-    loginPart ww;
-    managerPart mw;
+    QList<QList<QVariant>> accountInfo;//乘客信息
+    QList<QList<QVariant>> indexInfo;//字母索引信息
+    RegisterPart w;//注册窗口
+    loginPart ww;//登录窗口
+    managerPart mw;//管理员窗口
 
 };
 #endif // MAINWINDOW_H

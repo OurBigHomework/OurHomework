@@ -24,7 +24,7 @@ public:
 
     void setPath(QString path);//设定excel路径
     QVariant readAll(int num);//读取第num个工作表中的所有数据
-    int sheetCount();
+    int sheetCount();//获得工作表数量
 private:
     QString path;
     QString date;

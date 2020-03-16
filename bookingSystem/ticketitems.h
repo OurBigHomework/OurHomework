@@ -4,7 +4,9 @@
 #include <QWidget>
 #include<QLabel>
 #include<QPushButton>
-
+/*
+自定义item
+*/
 class ticketItems : public QWidget
 {
     Q_OBJECT
