@@ -58,6 +58,8 @@ private slots:
 
     void on_pushButtonEditOK_clicked();//点击编辑确定按钮
 
+    void on_buttonSearchByPlace_clicked();
+
 private:
     Ui::loginPart *ui;
 

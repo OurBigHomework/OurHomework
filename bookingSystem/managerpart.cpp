@@ -132,9 +132,9 @@ void managerPart::on_mofInfo_clicked()
     dia.show();
 }
 
-void managerPart::on_newFlights_clicked()
-{
-    dia.setWindowTitle("Add new flight");
-    dia.changePage(0);
-    dia.show();
-}
+//void managerPart::on_newFlights_clicked()
+//{
+//    dia.setWindowTitle("Add new flight");
+//    dia.changePage(0);
+//    dia.show();
+//}

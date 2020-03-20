@@ -29,7 +29,7 @@ private slots:
 
     void on_mofInfo_clicked();
 
-    void on_newFlights_clicked();
+    //void on_newFlights_clicked();
 
 private:
     //QString formateStr(QString &str,int k);

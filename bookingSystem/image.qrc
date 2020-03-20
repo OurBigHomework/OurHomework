@@ -34,5 +34,6 @@
         <file>../image/sky.jpg</file>
         <file>../image/sky1.jpg</file>
         <file>icon1.png</file>
+        <file>yes.png</file>
     </qresource>
 </RCC>

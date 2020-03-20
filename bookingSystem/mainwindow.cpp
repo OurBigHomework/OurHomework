@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&mw,&managerPart::comeBack,this,&MainWindow::openAgain);
     //connect(&mw,&managerPart::sendInfo,&ww,&loginPart::initPlaneInfo);
     connect(&ww,&loginPart::sendPlaceAndDate,&mw,&managerPart::getPlaceAndDate);
-    ww.setVars(mw.dia.vars);
+
     QElapsedTimer timer;
     timer.start();
     excel.setPath("D:/OurHomework/bookingSystem/Data/Passengers.xlsx");
@@ -46,6 +46,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_loginButton_clicked()
 {
 
+    ww.setVars(mw.dia.vars);
     QString Uname=ui->UserName->text();
     QString Pword=ui->password->text();
     int index=0;

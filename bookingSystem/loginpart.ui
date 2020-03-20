@@ -48,38 +48,6 @@ border:2px solid rgb(52, 112, 222)</string>
       <item row="1" column="0">
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
-         <widget class="QLabel" name="label_8">
-          <property name="minimumSize">
-           <size>
-            <width>560</width>
-            <height>80</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Microsoft YaHei UI</family>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">
-color: rgb(237, 255, 235);
-border:2px solid rgb(74, 95, 231);
-border-right:none;
-background-color: rgba(59, 39, 212,220);</string>
-          </property>
-          <property name="text">
-           <string>Query Mode</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QWidget" name="widget" native="true">
           <property name="styleSheet">
            <string notr="true">QWidget#widget{
@@ -108,7 +76,7 @@ background-color: rgb(247, 247, 247);
               <number>15</number>
              </property>
              <property name="topMargin">
-              <number>30</number>
+              <number>50</number>
              </property>
              <property name="rightMargin">
               <number>5</number>
@@ -123,7 +91,7 @@ background-color: rgb(247, 247, 247);
               <number>10</number>
              </property>
              <item row="1" column="4">
-              <widget class="QPushButton" name="buttonSearch_2">
+              <widget class="QPushButton" name="buttonSearchByPlace">
                <property name="minimumSize">
                 <size>
                  <width>100</width>
@@ -389,19 +357,6 @@ border-bottom:1px solid black;
                 <property name="verticalSpacing">
                  <number>10</number>
                 </property>
-                <item row="0" column="0">
-                 <spacer name="horizontalSpacer">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
                 <item row="0" column="1" colspan="2">
                  <widget class="QLabel" name="label_10">
                   <property name="font">
@@ -423,8 +378,8 @@ border-bottom:1px solid black;
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="3">
-                 <spacer name="horizontalSpacer_10">
+                <item row="0" column="0">
+                 <spacer name="horizontalSpacer">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -435,62 +390,6 @@ border-bottom:1px solid black;
                    </size>
                   </property>
                  </spacer>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QFontComboBox" name="start">
-                  <property name="minimumSize">
-                   <size>
-                    <width>160</width>
-                    <height>45</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>160</width>
-                    <height>120</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Arial</family>
-                    <pointsize>8</pointsize>
-                    <weight>50</weight>
-                    <bold>false</bold>
-                    <underline>false</underline>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
-                  <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::AdjustToContents</enum>
-                  </property>
-                  <property name="fontFilters">
-                   <set>QFontComboBox::AllFonts</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QLabel" name="label_4">
-                  <property name="maximumSize">
-                   <size>
-                    <width>100</width>
-                    <height>25</height>
-                   </size>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">border:0px;</string>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="pixmap">
-                   <pixmap resource="image.qrc">:/new/prefix1/toRight.png</pixmap>
-                  </property>
-                  <property name="scaledContents">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
                 </item>
                 <item row="1" column="2" colspan="2">
                  <widget class="QFontComboBox" name="end">
@@ -528,33 +427,6 @@ border-bottom:1px solid black;
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="4">
-                 <widget class="QPushButton" name="buttonSearch">
-                  <property name="minimumSize">
-                   <size>
-                    <width>100</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>80</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(59, 39, 212);
-padding:8px 20px;</string>
-                  </property>
-                  <property name="text">
-                   <string>search</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="2" column="0">
                  <widget class="QLabel" name="label_3">
                   <property name="maximumSize">
@@ -579,28 +451,6 @@ padding:8px 20px;</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QLabel" name="label_7">
-                  <property name="maximumSize">
-                   <size>
-                    <width>100</width>
-                    <height>25</height>
-                   </size>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">border:0px;</string>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="pixmap">
-                   <pixmap resource="image.qrc">:/new/prefix1/toRight.png</pixmap>
-                  </property>
-                  <property name="scaledContents">
-                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -631,19 +481,130 @@ padding:8px 20px;</string>
                   </property>
                  </widget>
                 </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="label_4">
+                  <property name="maximumSize">
+                   <size>
+                    <width>100</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border:0px;</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="pixmap">
+                   <pixmap resource="image.qrc">:/new/prefix1/toRight.png</pixmap>
+                  </property>
+                  <property name="scaledContents">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLabel" name="label_7">
+                  <property name="maximumSize">
+                   <size>
+                    <width>100</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border:0px;</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="pixmap">
+                   <pixmap resource="image.qrc">:/new/prefix1/toRight.png</pixmap>
+                  </property>
+                  <property name="scaledContents">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QFontComboBox" name="start">
+                  <property name="minimumSize">
+                   <size>
+                    <width>160</width>
+                    <height>45</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>160</width>
+                    <height>120</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Arial</family>
+                    <pointsize>8</pointsize>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                    <underline>false</underline>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContents</enum>
+                  </property>
+                  <property name="fontFilters">
+                   <set>QFontComboBox::AllFonts</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
+                 <spacer name="horizontalSpacer_10">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="1" column="4">
+                 <widget class="QPushButton" name="buttonSearch">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>50</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>80</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(59, 39, 212);
+padding:8px 20px;</string>
+                  </property>
+                  <property name="text">
+                   <string>search</string>
+                  </property>
+                 </widget>
+                </item>
                </layout>
               </item>
               <item>
                <widget class="Line" name="line">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="Line" name="line_2">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
                 </property>
                </widget>
               </item>

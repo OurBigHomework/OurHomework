@@ -165,31 +165,6 @@ color:white;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="newFlights">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Yu Gothic UI</family>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(97, 97, 218);
-color:white;</string>
-        </property>
-        <property name="text">
-         <string>Add new flights</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="mofInfo">
         <property name="minimumSize">
          <size>
@@ -221,6 +196,9 @@ color:white;</string>
           <width>0</width>
           <height>50</height>
          </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(97, 97, 218);
@@ -349,24 +327,6 @@ background-color: rgb(255, 255, 255);
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item>
-           <widget class="QLabel" name="label">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(85, 104, 212);
-color:rgb(255, 255, 255);
-background-color: rgb(97, 97, 218);</string>
-            </property>
-            <property name="text">
-             <string>StartingPoint          Terminal              Date           Time   </string>
-            </property>
-           </widget>
-          </item>
           <item>
            <widget class="QListWidget" name="list">
             <property name="styleSheet">

@@ -1,5 +1,6 @@
 #include "flightinfodialog.h"
 #include "ui_flightinfodialog.h"
+#include "threadwritecell.h"
 #include<QDebug>
 #include<QMessageBox>
 #include<QElapsedTimer>
@@ -9,13 +10,6 @@ FlightInfoDialog::FlightInfoDialog(QWidget *parent) :
     ui(new Ui::FlightInfoDialog)
 {
     ui->setupUi(this);
-
-
-//    qRegisterMetaType <QList<QList<QList<QVariant>>>>("QList<QList<QList<QVariant>>>&");
-//    th=new MyThread;
-//    th->setPath("D:/OurHomework/bookingSystem/Data/myData2.xlsx");
-//    th->start();
-
     e.setPath("D:/OurHomework/bookingSystem/Data/myData2.xlsx");
     QList<QVariant> varList;
     int c=e.sheetCount();
@@ -27,23 +21,7 @@ FlightInfoDialog::FlightInfoDialog(QWidget *parent) :
         vars.push_back(r);
 
     }
-
-
-//    myExcel excel;
-//    excel.setPath("D:/OurHomework/bookingSystem/Data/myData.xlsx");
-
-//    places= excel.getExcelVLine(1,0,"A1","A34");
-//   for(int i=0;i<places.size();i++)
-//   {
-//       ui->beginBox->addItem(places[i]);
-//       ui->endBox->addItem(places[i]);
-//       ui->beginBox_2->addItem(places[i]);
-//       ui->endBox_2->addItem(places[i]);
-//   }
-
-//  dates=excel.getExcelVLine(2,0,"A1","A5");
-
-//connect(th,&MyThread::isDone,this,&FlightInfoDialog::dealDone);
+connect(&w,&threadWriteCell::writeOk,this,&FlightInfoDialog::dealWriteOk);
 }
 
 FlightInfoDialog::~FlightInfoDialog()
@@ -54,6 +32,13 @@ FlightInfoDialog::~FlightInfoDialog()
 void FlightInfoDialog::changePage(int i)
 {
     ui->stackedWidget->setCurrentIndex(i);
+}
+
+void FlightInfoDialog::dealWriteOk()
+{
+    w.quit();
+    w.wait();
+
 }
 
 void FlightInfoDialog::initChangePage(QString &t, QString &t1, QString &t2, QString &t3)
@@ -130,15 +115,14 @@ void FlightInfoDialog::dealDone(QList<QList<QList<QVariant>>>&vars)
      this->dates=dates;
      for(int i=0;i<places.size();i++)
      {
-         ui->beginBox->addItem(places[i]);
-         ui->endBox->addItem(places[i]);
+
          ui->beginBox_2->addItem(places[i]);
          ui->endBox_2->addItem(places[i]);
      }
 
  }
-
-void FlightInfoDialog::on_buttonOk_clicked()
+/*
+ * void FlightInfoDialog::on_buttonOk_clicked()
 {
     QString bPlace=ui->beginBox->currentText();
     QString ePlace=ui->endBox->currentText();
@@ -171,6 +155,9 @@ void FlightInfoDialog::on_buttonOk_clicked()
     }
     qDebug()<<bPlace<<ePlace<<date;
 }
+ *
+ */
+
 
 void FlightInfoDialog::on_buttonOk_2_clicked()
 {
@@ -200,7 +187,10 @@ void FlightInfoDialog::on_buttonOk_2_clicked()
         }
         if(!vars.isEmpty())
         {
-
+            sheetNum=k;
+            qq1=q1;
+            qq2=q2;
+            dd=date;
             emit Search(q1,q2,date,vars[k]);
             close();
         }else{
@@ -222,6 +212,28 @@ void FlightInfoDialog::on_buttonChangeYes_clicked()
     QString tn3=ui->ticket_3->text();
     QString num=QString("%1-%2-%3").arg(tn1).arg(tn2).arg(tn3);
 //    myExcel*ex=new myExcel;
-//    ex->setPath("")
+//    ex->setPath("D:/OurHomework/bookingSystem/Data/myData2.xlsx");
+    QVector<int>rows,cols;//修改界面时间、票的索引
+    rows.push_back(line);
+    rows.push_back(line);
+    cols.push_back(currentTimeIndex);
+    cols.push_back(currentTimeIndex+1);
+    qDebug()<<"line:"<<line<<"time:"<<currentTimeIndex;
+    QStringList l;
+    l<<t<<num;
+//    ex->writeCell(l,rows,cols,sheetNum);
+    vars[sheetNum][line][currentTimeIndex]=QVariant(t);
+    vars[sheetNum][line][currentTimeIndex+1]=QVariant(num);
+    qDebug()<<vars[sheetNum][line][currentTimeIndex]<<vars[sheetNum][line][currentTimeIndex+1]<<"hh-240";
+    w.setPath("D:/OurHomework/bookingSystem/Data/myData2.xlsx");
+    w.setInfo(l,rows,cols,sheetNum);
+    w.start();
+    ui->stackedWidget->setCurrentIndex(0);
 
+}
+
+void FlightInfoDialog::on_returnButton_clicked()
+{
+    close();
+    emit Search(qq1,qq2,dd,vars[sheetNum]);
 }

@@ -28,6 +28,7 @@ SOURCES += \
     mythread.cpp \
     passenger.cpp \
     registerpart.cpp \
+    threadwritecell.cpp \
     ticketitems.cpp
 
 HEADERS += \
@@ -41,6 +42,7 @@ HEADERS += \
     mythread.h \
     passenger.h \
     registerpart.h \
+    threadwritecell.h \
     ticketitems.h
 
 FORMS += \

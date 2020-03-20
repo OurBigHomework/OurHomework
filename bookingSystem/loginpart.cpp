@@ -27,6 +27,8 @@ loginPart::loginPart(QWidget *parent) :
 
      ui->start->clear();
      ui->end->clear();
+     ui->start_2->clear();
+     ui->end_2->clear();
 }
 
 void loginPart::setVars(QList<QList<QList<QVariant> > > &vars)
@@ -36,7 +38,7 @@ void loginPart::setVars(QList<QList<QList<QVariant> > > &vars)
 
 void loginPart::initPersonalInfo()
 {
-
+    ui->stackedWidget->setCurrentIndex(0);
     ui->labelName->setText( passenger.getUsername());
     ui->Username->setText(QString("Username:").append(passenger.getUsername()));
     ui->Name->setText(QString("Name:").append(passenger.getName()));
@@ -44,6 +46,7 @@ void loginPart::initPersonalInfo()
     ui->Sex->setText(QString("Sex:").append(passenger.getSex()));
     ui->MobilePhone->setText(QString("MobilePhone:").append(passenger.getPhone()));
     ui->Password->setText(QString("Password:").append(passenger.getPassword()));
+    initDateAndPlace(vars);
 }
 
 void loginPart::initDateAndPlace(QList<QList<QList<QVariant>>>&v)
@@ -64,7 +67,9 @@ void loginPart::initDateAndPlace(QList<QList<QList<QVariant>>>&v)
          {
 
              ui->start->addItem(place[i]);
+             ui->start_2->addItem(place[i]);
              ui->end->addItem(place[i]);
+             ui->end_2->addItem(place[i]);
          }
     emit sendPlaceAndDate(place,dates);
     qDebug()<<"d and p init ok";
@@ -142,7 +147,7 @@ void loginPart::showSearchPage(int begin, int end, QString date)
         return;
     }
     int flag=-1;
-    qDebug()<<"Psize:"<<place.size()<<"Dsize:"<<dates.size()<<"date:"<<date;
+    //qDebug()<<"Psize:"<<place.size()<<"Dsize:"<<dates.size()<<"date:"<<date;
 
     for(int i=0;i<dates.size();i++)
     {
@@ -248,5 +253,74 @@ void loginPart::on_pushButtonEditOK_clicked()
 {
     ui->textEdit->setReadOnly(true);
     ui->textEdit->setCursor(Qt::ArrowCursor);
+
+}
+
+void loginPart::on_buttonSearchByPlace_clicked()
+{
+    if(ui->list->count()>0)
+    {
+        deleteItems(ui->list,ui->list->count());
+    }
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->titleText->setText("Flight Information");
+
+    QString begPlace=ui->start_2->currentText();
+    QString endPlace=ui->end_2->currentText();
+    if(begPlace==endPlace)
+    {
+        QMessageBox::information(this,"Warning","Start and end cannot be the same");
+        return;
+    }
+
+    int a=-1,b=-1;
+    for(int i=0;i<place.size();i++)
+    {
+
+        if(place[i]==begPlace)a=i;
+
+        if(place[i]==endPlace)b=i;
+        if(a!=-1&&b!=-1)break;
+    }
+    if(vars.isEmpty())
+    {
+        QMessageBox::information(this,"Tips:","数据正在加载中，请稍后。。。");
+        return;
+    }
+    int line=a*place.size()+b+1;
+    ui->list->setViewMode(QListView::ListMode);
+    QString placeInfo=begPlace.append("(Starting Station)------->> ").append(endPlace).append("(Terminus)");
+    for(int i=0;i<5;i++)
+    {
+        QString d=dates[i];
+
+        QList<QList<QVariant>> res=vars[i];
+
+         for(int i=1;i<(res[0].size()-3)/2+1;i++)
+         {
+
+             int index=2*i+1;
+             int num=2*i+2;
+             QString p=res[line][index].toString();
+             QString planeText=begPlace.left(2).toUpper().append(endPlace.left(2).toUpper());
+             QString pt=planeText.append(p.left(2)).append(p.right(2));
+             ticketItems *it=new ticketItems(ui->list);
+             it->setTime(p);
+             it->setPlaces(placeInfo);
+             it->setIndex(index);
+             it->setTicketsNum(res[line][num].toString());
+             it->setHasTicket(d);
+             it->setPlaneName(pt);
+
+             QListWidgetItem*item=new QListWidgetItem(ui->list,0);
+             item->setSizeHint(QSize(600,160));
+             ui->list->setItemWidget(item,it);
+
+             connect(it,&ticketItems::itemClicked,this,&loginPart::itemClick);
+
+         }
+
+    }
+    ui->list->show();
 
 }

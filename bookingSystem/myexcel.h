@@ -17,6 +17,7 @@ public:
 
     ~myExcel();
     //QString getDate();
+    void writeCell(QStringList str,QVector<int>row,QVector<int>col,int n);//修改excel表中第n个表第row[i]+1行col[i]+1行的数据
     void setDate(QString d);
     void excelToQList(const QVariant &var,QList<QList<QVariant>> &res);//将excel中的数据转成二维数组存储在res中
     QVector<QString> getExcelVLine(int n,int vnum,QString begin,QString end);//获取第n个工作表第vnum列begin-》end间的数据
@@ -28,6 +29,7 @@ public:
 private:
     QString path;
     QString date;
+
 
 
 
