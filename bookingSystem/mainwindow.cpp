@@ -21,10 +21,15 @@ MainWindow::MainWindow(QWidget *parent)
     QElapsedTimer timer;
     timer.start();
     excel.setPath("D:/OurHomework/bookingSystem/Data/Passengers.xlsx");
-    QVariant v1=excel.readAll(1);
-    excel.excelToQList(v1,accountInfo);
-    QVariant v2=excel.readAll(2);
-    excel.excelToQList(v2,indexInfo);
+//    QVariant v1=excel.readAll(1);
+//    excel.excelToQList(v1,accountInfo);
+//    QVariant v2=excel.readAll(2);
+//    excel.excelToQList(v2,indexInfo);
+    QList<QList<QList<QVariant>>> mylist;
+    excel.readAllSheet(mylist);
+    accountInfo=mylist[0];
+    indexInfo=mylist[1];
+
     qDebug()<< timer.elapsed()<<"--main";
 
 
@@ -77,8 +82,15 @@ void MainWindow::on_loginButton_clicked()
             QString phone=accountInfo[index][3].toString();
             QString birday=accountInfo[index][4].toString();
             QString sex=accountInfo[index][5].toString();
+            QVector<QString> ticketvec;
+            for(int x=6;x<=10;x++)
+            {
+                QString ticket=accountInfo[index][x].toString();
+                ticketvec.push_back(ticket);
+            }
+
             ww.setPassenger(Uname,Pword,birday,sex,rname,phone,index);
-            ww.sendLoginSignal();
+            ww.sendLoginSignal(ticketvec);
             ww.showMaximized();
         }
         else

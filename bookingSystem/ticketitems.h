@@ -25,6 +25,7 @@ public:
     void setTime(QString text);
     void setIndex(int i);
     void setTicketsNum(QString t);
+    void setCount(QString c);
 
     void mousePressEvent(QMouseEvent *event) override;
 
@@ -36,6 +37,7 @@ private:
     QLabel*places;
     QLabel*hasTicket;
     QLabel*time;
+    QLabel*count;
     int index;
     QString num;
 

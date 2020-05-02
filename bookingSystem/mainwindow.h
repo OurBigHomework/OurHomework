@@ -35,6 +35,7 @@ private:
     myExcel excel;
     QList<QList<QVariant>> accountInfo;//乘客信息
     QList<QList<QVariant>> indexInfo;//字母索引信息
+
     RegisterPart w;//注册窗口
     loginPart ww;//登录窗口
     managerPart mw;//管理员窗口

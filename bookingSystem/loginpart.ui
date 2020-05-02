@@ -1360,7 +1360,7 @@ color: rgb(255, 255, 255);</string>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="myTicketsButton">
            <property name="minimumSize">
             <size>
              <width>300</width>

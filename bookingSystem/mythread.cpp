@@ -23,18 +23,20 @@ void MyThread::run()
 
         myExcel*excel=new myExcel;
         excel->setPath(path);
-        QList<QVariant> varList;
+//        QList<QVariant> varList;
         QList<QList<QList<QVariant>>> mylist;
 
-        int c=excel->sheetCount();
-        for(int i=0;i<c;i++)
-        {
-            varList.push_back(excel->readAll(i+1));
-            QList<QList<QVariant>> res;
-            excel->excelToQList(varList[i],res);
-            mylist.push_back(res);
-            //qDebug()<<mylist[i][0][0].toString();
-        }
+//        int c=excel->sheetCount();
+//        for(int i=0;i<c;i++)
+//        {
+//            varList.push_back(excel->readAll(i+1));
+//            QList<QList<QVariant>> res;
+//            excel->excelToQList(varList[i],res);
+//            mylist.push_back(res);
+//            //qDebug()<<mylist[i][0][0].toString();
+//        }
+
+        excel->readAllSheet(mylist);
         qDebug()<<"ok";
 
         OleUninitialize();

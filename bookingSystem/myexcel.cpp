@@ -92,6 +92,39 @@ void myExcel::setPath(QString path)
 {
     this->path=path;
 }
+
+void myExcel::readAllSheet( QList<QList<QList<QVariant>>> &mylist)
+{
+    QAxObject excel("Excel.Application");
+    excel.setProperty("Visible",false);
+    QAxObject *workbooks = excel.querySubObject("WorkBooks");
+   workbooks->dynamicCall("Open (const QString&)", QString(path));
+    QAxObject *workbook = excel.querySubObject("ActiveWorkBook");//获取活动工作簿
+    QAxObject*worksheets=workbook->querySubObject("WorkSheets");
+    int num=worksheets->property("Count").toInt();
+    QList<QVariant> varList;
+
+    for(int i=0;i<num;i++)
+    {
+        QVariant var;
+        QAxObject* sheet = workbook->querySubObject("Worksheets(int)", i+1);
+        if (sheet != NULL && ! sheet->isNull())
+        {
+            QAxObject *usedRange = sheet->querySubObject("UsedRange");
+
+            var = usedRange->dynamicCall("Value");
+            delete usedRange;
+        }
+        varList.push_back(var);
+        QList<QList<QVariant>> res;
+        excelToQList(varList[i],res);
+        mylist.push_back(res);
+    }
+    workbook->dynamicCall("Close(Boolean)",false);
+    excel.dynamicCall("Quit(void)");
+}
+
+
 QVariant myExcel::readAll(int num)
 {
     QAxObject excel("Excel.Application");

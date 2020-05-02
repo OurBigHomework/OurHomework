@@ -347,9 +347,7 @@ void loginPart::on_myTicketsButton_clicked()
     if(pTickets)
     {
         clearList();
-        qDebug()<<'size:'<<tickets.size();
-        qDebug()<<tickets;
-
+       
         for(int k=0;k<5;k++)
         {
             QStringList tk=tickets[k].split("#");
@@ -365,8 +363,8 @@ void loginPart::on_myTicketsButton_clicked()
                     int tindex=mlist.at(1).toInt();
                     QString count=mlist.at(2);
                     int seat=mlist.at(3).toInt();
-                    qDebug()<<vars[k][pindex][0]<<"-->"<<vars[k][pindex][1]<<" "<<vars[k][pindex][tindex*2+1]
-                            <<" "<<count<<' '<<seat<<"等座";
+//                    qDebug()<<vars[k][pindex][0]<<"-->"<<vars[k][pindex][1]<<" "<<vars[k][pindex][tindex*2+1]
+//                            <<" "<<count<<' '<<seat<<"等座";
                     if(vars[k][pindex][0].toString()!=vars[k][pindex][1].toString())
                     {
                         QString placeInfo=vars[k][pindex][0].toString().append("(Starting Station)------->> ").append(vars[k][pindex][1].toString()).append("(Terminus)");

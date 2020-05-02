@@ -32,14 +32,15 @@ public:
     void showSearchPage(int begin,int end,QString date);//展示售票页面
     void deleteItems(QListWidget*list,int count);//删除QListWidget中的item
     void setPassenger(QString username,QString password,QString birthday,QString sex,QString name,QString phone,int index);//设置乘客信息
-    void sendLoginSignal();//发送登录信号
+    void sendLoginSignal(QVector<QString>&tInfo);//发送登录信号
     void setVars(QList<QList<QList<QVariant>>>& vars);//为vars赋值
    // void senInitSignal();
-    void initPersonalInfo();//初始化乘客信息
+    void initPersonalInfo(QVector<QString>&t);//初始化乘客信息
     void initPlaneInfo(QList<QList<QList<QVariant>>>&vars);//初始化航班信息
     void initDateAndPlace(QList<QList<QList<QVariant>>>&v);//初始化日期和地点
     void itemClick(ticketItems*);//stackedwidget里面item点击事件处理
-
+    void clearList();
+    void showP_TTips(QList<QList<QList<QVariant>>>&vars);
 protected:
     void paintEvent(QPaintEvent *event);//设置背景
 
@@ -60,6 +61,8 @@ private slots:
 
     void on_buttonSearchByPlace_clicked();
 
+    void on_myTicketsButton_clicked();
+
 private:
     Ui::loginPart *ui;
 
@@ -70,11 +73,15 @@ private:
     //int timeIndex;
     Passenger passenger;
     QList<QList<QList<QVariant>>> vars;//存储所有航班信息的三维数组
+    QList<QList<QList<QVariant>>> p_t;
     MyThread *th2;//线程，启动时间和地点的初始化
+    MyThread *th3;
+    bool pTickets;
+    QVector<QString> tickets;
 
 signals:
     void openMainWindow();
-    void initLogin();
+    void initLogin(QVector<QString> &tInfo);
     void sendPlaceAndDate(QVector<QString>&place,QVector<QString>&dates);//传递地点和时间数据
 
 

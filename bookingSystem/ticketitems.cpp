@@ -13,6 +13,7 @@ void ticketItems::init()
     hasTicket=new QLabel(this);
     time=new QLabel(this);
     places=new QLabel(this);
+    count=new QLabel(this);
 
     pic=new QLabel(this);
     pic->setFixedSize(140,110);
@@ -22,6 +23,7 @@ void ticketItems::init()
     QPalette color1;
     color1.setColor(QPalette::Text,Qt::gray);
     hasTicket->setPalette(color1);
+    count->setPalette(color1);
 
 
     QPalette color2;
@@ -33,18 +35,24 @@ void ticketItems::init()
     time->setFont(f);
     f.setPointSize(10);
     hasTicket->setFont(f);
+    count->setFont(f);
 
     pic->move(10,25);
     time->move(160,30);
     planeName->move(160,80);
     places->move(160,110);
     hasTicket->move(480,50);
+    count->move(490,80);
 
 
 
 
 
 
+}
+void ticketItems::setCount(QString c)
+{
+    count->setText(c);
 }
 
 QString ticketItems::getTicketsNum()
