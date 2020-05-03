@@ -63,7 +63,14 @@ void ticketItems::setTicketsNum(QString t)
 {
     num=t;
 }
-
+int ticketItems::getDayIndex()
+{
+    return dayIndex;
+}
+int ticketItems::getRow()
+{
+    return row;
+}
 QString ticketItems::getTime()
 {
     return time->text();
@@ -96,6 +103,15 @@ void ticketItems::setPlaneName(QString text)
 void ticketItems::setHasTicket(QString text)
 {
     hasTicket->setText(text);
+    day=text;
+}
+void ticketItems::setRow(int i)
+{
+    row=i;
+}
+void ticketItems::setDayIndex(int i)
+{
+    dayIndex=i;
 }
 void ticketItems::setIndex(int i)
 {

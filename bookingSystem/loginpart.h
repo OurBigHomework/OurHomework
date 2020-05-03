@@ -14,7 +14,8 @@
 #include<QList>
 #include "ticketitems.h"
 #include "passenger.h"
-
+#include "chooseticketdialog.h"
+#include "threadwritecell.h"
 namespace Ui {
 class loginPart;
 }
@@ -41,6 +42,10 @@ public:
     void itemClick(ticketItems*);//stackedwidget里面item点击事件处理
     void clearList();
     void showP_TTips(QList<QList<QList<QVariant>>>&vars);
+    void buySuccess(int r,int c,int d,int n,int count);
+    void buyFail();
+    void noTicketError(int r,int c,int d,int n,int count);
+    void dealDone();
 protected:
     void paintEvent(QPaintEvent *event);//设置背景
 
@@ -76,8 +81,11 @@ private:
     QList<QList<QList<QVariant>>> p_t;
     MyThread *th2;//线程，启动时间和地点的初始化
     MyThread *th3;
+    threadWriteCell*write;
     bool pTickets;
     QVector<QString> tickets;
+
+    chooseTicketDialog*dia;
 
 signals:
     void openMainWindow();

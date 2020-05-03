@@ -17,6 +17,8 @@ public:
     QString getPlaces();
     QString getTime();
     int getIndex();
+    int getRow();
+    int getDayIndex();
     QString getTicketsNum();
     bool hasTicketOrNot();
     void setPlaneName(QString text);
@@ -26,6 +28,8 @@ public:
     void setIndex(int i);
     void setTicketsNum(QString t);
     void setCount(QString c);
+    void setRow(int i);
+    void setDayIndex(int i);
 
     void mousePressEvent(QMouseEvent *event) override;
 
@@ -39,7 +43,10 @@ private:
     QLabel*time;
     QLabel*count;
     int index;
+    int row;
+    int dayIndex;
     QString num;
+    QString day;
 
 
 signals:

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>589</width>
-    <height>333</height>
+    <width>687</width>
+    <height>347</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
 background-color: rgba(78, 99, 189,220);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
+   <item row="0" column="0" colspan="2">
     <widget class="QLabel" name="label_17">
      <property name="font">
       <font>
@@ -39,7 +39,7 @@ color: rgb(234, 235, 249);</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
+   <item row="0" column="2">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -68,86 +68,44 @@ color: rgb(234, 235, 249);</string>
      </property>
     </spacer>
    </item>
-   <item row="1" column="1">
+   <item row="1" column="1" colspan="2">
     <widget class="QWidget" name="widget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>550</width>
+       <height>220</height>
+      </size>
+     </property>
      <property name="styleSheet">
       <string notr="true">
 background-color: rgb(245, 245, 245);</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <property name="leftMargin">
-       <number>12</number>
-      </property>
-      <property name="topMargin">
-       <number>30</number>
-      </property>
-      <property name="rightMargin">
-       <number>12</number>
-      </property>
-      <property name="bottomMargin">
-       <number>30</number>
-      </property>
-      <property name="horizontalSpacing">
-       <number>25</number>
-      </property>
-      <property name="verticalSpacing">
-       <number>16</number>
-      </property>
-      <item row="3" column="2">
-       <widget class="QLabel" name="label_11">
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>$100</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_16">
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="image.qrc">:/new/prefix1/icon1.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string>NO.3</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="4">
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 46, 202);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>OK</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QLabel" name="label_14">
-        <property name="text">
-         <string>120</string>
+         <string>舱位等级</string>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>price</string>
+         <string>价格</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>余票量</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>购买数量</string>
         </property>
        </widget>
       </item>
@@ -177,10 +135,32 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="3">
-       <widget class="QLabel" name="label_4">
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>allowance</string>
+         <string>$150</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="num1">
+        <property name="text">
+         <string>120</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QSpinBox" name="spinBox1"/>
+      </item>
+      <item row="1" column="5">
+       <widget class="QPushButton" name="buy1">
+        <property name="styleSheet">
+         <string notr="true">
+background-color: rgb(46, 46, 202);
+color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>OK</string>
         </property>
        </widget>
       </item>
@@ -210,22 +190,25 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
+      <item row="2" column="2">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>$120</string>
+        </property>
+       </widget>
+      </item>
       <item row="2" column="3">
-       <widget class="QLabel" name="label_13">
+       <widget class="QLabel" name="num2">
         <property name="text">
          <string>120</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>level </string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="4">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QSpinBox" name="spinBox2"/>
+      </item>
+      <item row="2" column="5">
+       <widget class="QPushButton" name="buy2">
         <property name="styleSheet">
          <string notr="true">background-color: rgb(46, 46, 202);
 color: rgb(255, 255, 255);</string>
@@ -235,36 +218,57 @@ color: rgb(255, 255, 255);</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="2">
-       <widget class="QLabel" name="label_10">
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_16">
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
         <property name="text">
-         <string>$120</string>
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="image.qrc">:/new/prefix1/icon1.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item row="1" column="3">
-       <widget class="QLabel" name="label_12">
+      <item row="3" column="1">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>NO.3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>$100</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QLabel" name="num3">
         <property name="text">
          <string>120</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="4">
-       <widget class="QPushButton" name="pushButton">
+      <item row="3" column="4">
+       <widget class="QSpinBox" name="spinBox3"/>
+      </item>
+      <item row="3" column="5">
+       <widget class="QPushButton" name="buy3">
         <property name="styleSheet">
-         <string notr="true">
-background-color: rgb(46, 46, 202);
+         <string notr="true">background-color: rgb(46, 46, 202);
 color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>OK</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>$150</string>
         </property>
        </widget>
       </item>

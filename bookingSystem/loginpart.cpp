@@ -20,21 +20,101 @@ loginPart::loginPart(QWidget *parent) :
     th2->start();
 
     th3=new MyThread;
-    th3->setPath("D:/OurHomework/bookingSystem/Data/Passengers-TicketsData.xlsx");
+    th3->setPath("D:/OurHomework/bookingSystem/Data/PassengersTicketsData.xlsx");
     th3->start();
+
+    write=new threadWriteCell;
+
+    dia=new chooseTicketDialog;
 
     pTickets=false;
     qRegisterMetaType <QList<QList<QList<QVariant>>>>("QList<QList<QList<QVariant>>>&");
     connect(this,&loginPart::initLogin,this,&loginPart::initPersonalInfo);
     connect(th2,&MyThread::isDone,this,&loginPart::initDateAndPlace);
     connect(th3,&MyThread::isDone,this,&loginPart::showP_TTips);
-
+    connect(dia,&chooseTicketDialog::success,this,&loginPart::buySuccess);
+    connect(dia,&chooseTicketDialog::fail,this,&loginPart::buyFail);
+    connect(dia,&chooseTicketDialog::noTicket,this,&loginPart::noTicketError);
+    connect(write,&threadWriteCell::writeOk,this,&loginPart::dealDone);
 
 
      ui->start->clear();
      ui->end->clear();
      ui->start_2->clear();
      ui->end_2->clear();
+}
+
+void loginPart::dealDone()
+{
+
+        write->quit();
+        write->wait();
+        qDebug()<<"成功修改！";
+        th3->start();
+
+}
+void loginPart::noTicketError(int r, int c, int d, int n,int count)
+{
+    if(count<=0)return;
+            QString str="尊敬的客户：\n很抱歉当前该航班没有余票，您可以选择排队候补或重新选择航班。推荐航班如下：\n同一天同一舱位等级有余票的其他航班：";
+            QMessageBox*msg=new QMessageBox();
+            msg->setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+            msg->button(QMessageBox::Yes)->setText("候补");
+            msg->button(QMessageBox::No)->setText("退出");
+            for(int i=0;i<13;i++)
+            {
+                if(i!=c)
+                {
+                    QString ss=vars[d][r][i*2+4].toString();
+                    QStringList l=ss.split("-");
+                    if(l.at(n-1).toInt()>0)
+                    {
+                         str=str+vars[d][r][i*2+3].toString()+"\t";
+                    }
+
+                }
+            }
+            str=str+"\n";
+            msg->setText(str);
+            int result=msg->exec();
+            if(result==QMessageBox::Yes)
+            {
+                if(write->isRunning())
+                {
+                    QMessageBox::information(this,"提示","系统繁忙，请稍后再试！");
+                    return;
+                }
+                    write->setPath("D:/OurHomework/bookingSystem/Data/PassengersTicketsData.xlsx");
+                    QStringList sl;
+                    QVector<int>a,b;
+                    int pindex=passenger.getIndex();
+                    int cc=(c-3)/2;
+                    QString ss=p_t[d][r][cc*3+n+1].toString();
+                    QString ss2=QString::number(pindex)+"-"+QString::number(count);
+                    sl.push_back(ss.append(ss2+"%"));
+                    a.push_back(r);
+                    b.push_back(cc*3+n+1);
+                    qDebug()<<d<<' '<<r<<' '<<c<<' '<<sl.at(0);
+                    write->setInfo(sl,a,b,d);
+                    write->start();
+                    msg->close();
+                    dia->close();
+            }else if(result==QMessageBox::No)
+            {
+                msg->close();
+            }
+}
+
+void loginPart::buySuccess(int r, int c, int d, int n,int count)
+{
+
+
+
+}
+
+void loginPart::buyFail()
+{
+    QMessageBox::information(this,"错误","当前余票数量不足，请重新选择！");
 }
 
 void loginPart::showP_TTips(QList<QList<QList<QVariant>>>&vars)
@@ -135,8 +215,18 @@ void loginPart::initPlaneInfo(QList<QList<QList<QVariant>>>&vars)
 
 void loginPart::itemClick(ticketItems *it)
 {
-    chooseTicketDialog*dia=new chooseTicketDialog;
+
+
+    int col=it->getIndex();
+    int row=it->getRow();
+    int day=it->getDayIndex();
+    QString s=vars[day][row][col+1].toString();
+    QStringList l=s.split("-");
+    dia->init(l.at(0).toInt(),l.at(1).toInt(),l.at(2).toInt(),row,col,day);
     dia->show();
+
+
+
 }
 
 void loginPart::clearList()
@@ -209,6 +299,9 @@ void loginPart::showSearchPage(int begin, int end, QString date)
                 it->setTicketsNum(res[line][num].toString());
                 it->setHasTicket(t);
                 it->setPlaneName(pt);
+                it->setRow(line);
+                it->setDayIndex(flag);
+
 
                 QListWidgetItem*item=new QListWidgetItem(ui->list,0);
                 item->setSizeHint(QSize(600,160));
@@ -307,11 +400,11 @@ void loginPart::on_buttonSearchByPlace_clicked()
     int line=a*place.size()+b+1;
     ui->list->setViewMode(QListView::ListMode);
     QString placeInfo=begPlace.append("(Starting Station)------->> ").append(endPlace).append("(Terminus)");
-    for(int i=0;i<5;i++)
+    for(int j=0;j<5;j++)
     {
-        QString d=dates[i];
+        QString d=dates[j];
 
-        QList<QList<QVariant>> res=vars[i];
+        QList<QList<QVariant>> res=vars[j];
 
          for(int i=1;i<(res[0].size()-3)/2+1;i++)
          {
@@ -328,6 +421,8 @@ void loginPart::on_buttonSearchByPlace_clicked()
              it->setTicketsNum(res[line][num].toString());
              it->setHasTicket(d);
              it->setPlaneName(pt);
+             it->setRow(line);
+             it->setDayIndex(j);
 
              QListWidgetItem*item=new QListWidgetItem(ui->list,0);
              item->setSizeHint(QSize(600,160));
@@ -347,8 +442,6 @@ void loginPart::on_myTicketsButton_clicked()
     if(pTickets)
     {
         clearList();
-        qDebug()<<'size:'<<tickets.size();
-        qDebug()<<tickets;
 
         for(int k=0;k<5;k++)
         {
@@ -365,8 +458,8 @@ void loginPart::on_myTicketsButton_clicked()
                     int tindex=mlist.at(1).toInt();
                     QString count=mlist.at(2);
                     int seat=mlist.at(3).toInt();
-                    qDebug()<<vars[k][pindex][0]<<"-->"<<vars[k][pindex][1]<<" "<<vars[k][pindex][tindex*2+1]
-                            <<" "<<count<<' '<<seat<<"等座";
+//                    qDebug()<<vars[k][pindex][0]<<"-->"<<vars[k][pindex][1]<<" "<<vars[k][pindex][tindex*2+1]
+//                            <<" "<<count<<' '<<seat<<"等座";
                     if(vars[k][pindex][0].toString()!=vars[k][pindex][1].toString())
                     {
                         QString placeInfo=vars[k][pindex][0].toString().append("(Starting Station)------->> ").append(vars[k][pindex][1].toString()).append("(Terminus)");
@@ -395,6 +488,7 @@ void loginPart::on_myTicketsButton_clicked()
         }
         ui->stackedWidget->setCurrentIndex(1);
         ui->list->show();
+
 
     }
     else
