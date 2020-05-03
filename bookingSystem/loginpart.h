@@ -46,6 +46,15 @@ public:
     void buyFail();
     void noTicketError(int r,int c,int d,int n,int count);
     void dealDone();
+    void dealDone2();
+    void dealDone3();
+    void writePT(int r,int c,int d,int n,int count,QString flag);
+    void writePT2(int r,int c,int d,int n,int count);
+    void writeCell(QString&s1,int r,int c,int d,QString&path,threadWriteCell*th);
+    void writeDT(int r,int c,int d,int n,int count);
+    bool isExist(QString&s1,QString tar,int count,int tindex);
+
+
 protected:
     void paintEvent(QPaintEvent *event);//设置背景
 
@@ -82,13 +91,15 @@ private:
     MyThread *th2;//线程，启动时间和地点的初始化
     MyThread *th3;
     threadWriteCell*write;
+    threadWriteCell*write2;
+    threadWriteCell*write3;
     bool pTickets;
     QVector<QString> tickets;
 
     chooseTicketDialog*dia;
 
 signals:
-    void openMainWindow();
+//    void openMainWindow();
     void initLogin(QVector<QString> &tInfo);
     void sendPlaceAndDate(QVector<QString>&place,QVector<QString>&dates);//传递地点和时间数据
 

@@ -24,8 +24,12 @@ loginPart::loginPart(QWidget *parent) :
     th3->start();
 
     write=new threadWriteCell;
+    write2=new threadWriteCell;
+    write3=new threadWriteCell;
 
     dia=new chooseTicketDialog;
+
+
 
     pTickets=false;
     qRegisterMetaType <QList<QList<QList<QVariant>>>>("QList<QList<QList<QVariant>>>&");
@@ -36,6 +40,8 @@ loginPart::loginPart(QWidget *parent) :
     connect(dia,&chooseTicketDialog::fail,this,&loginPart::buyFail);
     connect(dia,&chooseTicketDialog::noTicket,this,&loginPart::noTicketError);
     connect(write,&threadWriteCell::writeOk,this,&loginPart::dealDone);
+    connect(write2,&threadWriteCell::writeOk,this,&loginPart::dealDone2);
+    connect(write3,&threadWriteCell::writeOk,this,&loginPart::dealDone3);
 
 
      ui->start->clear();
@@ -44,19 +50,33 @@ loginPart::loginPart(QWidget *parent) :
      ui->end_2->clear();
 }
 
+void loginPart::dealDone3()
+{
+    write3->quit();
+    write3->wait();
+    qDebug()<<"修改完成3！";
+}
+
+void loginPart::dealDone2()
+{
+    write2->quit();
+    write2->wait();
+    qDebug()<<"修改完成2！";
+}
+
 void loginPart::dealDone()
 {
 
         write->quit();
         write->wait();
         qDebug()<<"成功修改！";
-        th3->start();
+//        th3->start();
 
 }
 void loginPart::noTicketError(int r, int c, int d, int n,int count)
 {
     if(count<=0)return;
-            QString str="尊敬的客户：\n很抱歉当前该航班没有余票，您可以选择排队候补或重新选择航班。推荐航班如下：\n同一天同一舱位等级有余票的其他航班：";
+            QString str="尊敬的客户：\n很抱歉当前该航班没有余票，您可以选择重新选择航班。推荐航班如下：\n同一天同一舱位等级有余票的其他航班：";
             QMessageBox*msg=new QMessageBox();
             msg->setStandardButtons(QMessageBox::Yes|QMessageBox::No);
             msg->button(QMessageBox::Yes)->setText("候补");
@@ -74,7 +94,7 @@ void loginPart::noTicketError(int r, int c, int d, int n,int count)
 
                 }
             }
-            str=str+"\n";
+            str=str+"\n如果您对以上推荐航班不满意，您还可以选择排队候补，一旦该航班有余票，我们会第一时间为您预定。感谢您的支持。\n";
             msg->setText(str);
             int result=msg->exec();
             if(result==QMessageBox::Yes)
@@ -84,29 +104,155 @@ void loginPart::noTicketError(int r, int c, int d, int n,int count)
                     QMessageBox::information(this,"提示","系统繁忙，请稍后再试！");
                     return;
                 }
-                    write->setPath("D:/OurHomework/bookingSystem/Data/PassengersTicketsData.xlsx");
-                    QStringList sl;
-                    QVector<int>a,b;
-                    int pindex=passenger.getIndex();
-                    int cc=(c-3)/2;
-                    QString ss=p_t[d][r][cc*3+n+1].toString();
-                    QString ss2=QString::number(pindex)+"-"+QString::number(count);
-                    sl.push_back(ss.append(ss2+"%"));
-                    a.push_back(r);
-                    b.push_back(cc*3+n+1);
-                    qDebug()<<d<<' '<<r<<' '<<c<<' '<<sl.at(0);
-                    write->setInfo(sl,a,b,d);
-                    write->start();
-                    msg->close();
-                    dia->close();
+
+                writePT(r,c,d,n,count,"%");
+                 msg->close();
+                 dia->close();
             }else if(result==QMessageBox::No)
             {
                 msg->close();
             }
 }
+void loginPart::writeDT(int r, int c, int d,int n,int count)
+{
+    QString t=vars[d][r][c+1].toString();
 
+    QStringList m=t.split("-");
+    int a=m[n-1].toInt()-count;
+    m[n-1]=QString::number(a);
+    QString target=QString("%1-%2-%3").arg(m[0]).arg(m[1]).arg(m[2]);
+    QString path="D:/OurHomework/bookingSystem/Data/myData2.xlsx";
+    vars[d][r][c+1]=QVariant(target);
+
+    qDebug()<<"target:"<<target;
+    writeCell(target,r,c+1,d,path,write3);
+}
+
+bool loginPart::isExist(QString &s1, QString tar,int count,int tindex)
+{
+    QStringList l=s1.split("#");
+    int size=l.size();
+    QString ss;
+    int flag=0;
+    for(int i=0;i<size-1;i++)
+    {
+
+        if(l.at(i).indexOf(tar)>=0)
+        {
+            QStringList t=l.at(i).split("-");
+            int m=t.at(tindex).toInt();
+            m=m+count;
+
+            if(tindex==1)
+            {
+                 ss.append(tar+"-"+QString::number(m)+"#");
+                 qDebug()<<tar+"-"+QString::number(m)+"#";
+                  flag=1;
+            }else if(tindex==2)
+            {
+                if(t.at(0)==tar.split("-").at(0))
+                {
+                    ss.append(tar+"-"+QString::number(m)+"-"+t.at(3)+"#");
+                    qDebug()<<tar+"-"+QString::number(m)+"-"+t.at(3)+"#";
+                     flag=1;
+                }
+                else
+                {
+                    ss.append(l.at(i)).append("#");
+                }
+
+
+            }else
+            {
+                QMessageBox::information(this,"警告","tindex输入必须为1或2");
+
+            }
+
+
+        }else
+        {
+            ss.append(l.at(i)).append("#");
+        }
+    }
+    ss.append(l.at(size-1));
+    if(flag==1)
+    {
+        s1=ss;
+        return true;
+    }
+    return false;
+}
+void loginPart::writePT(int r, int c, int d, int n, int count,QString flag)
+{
+
+    int pindex=passenger.getIndex();
+    int cc=(c-3)/2;
+    QString ss=p_t[d][r][cc*3+n+1].toString();
+    QString ss2=QString::number(pindex)+"-"+QString::number(count);
+    QString q;
+    if(isExist(ss,QString::number(pindex),count,1))
+    {
+        q=ss;
+        qDebug()<<"exist";
+    }
+    else
+    {
+        q=ss.append(ss2+flag);
+    }
+
+     p_t[d][r][cc*3+n+1]=q;
+     qDebug()<<d<<' '<<r<<' '<<c<<' '<<q;
+     QString path="D:/OurHomework/bookingSystem/Data/PassengersTicketsData.xlsx";
+     writeCell(q,r,cc*3+n+1,d,path,write);
+
+
+}
+void loginPart::writeCell(QString &s1, int r, int c, int d, QString &path,threadWriteCell*th)
+{
+    QStringList sl;
+    QVector<int>a,b;
+    sl.push_back(s1);
+    a.push_back(r);
+    b.push_back(c);
+    th->setPath(path);
+    th->setInfo(sl,a,b,d);
+    th->start();
+}
+void loginPart::writePT2(int r, int c, int d, int n, int count)
+{
+
+    QString s=tickets[d];
+    qDebug()<<"d:"<<d<<"\n"<<s;
+    int k=(c-1)/2;
+    QString q=QString("%1-%2").arg(r).arg(k);
+    if(isExist(tickets[d],q,count,2))
+    {
+
+        qDebug()<<"exist2";
+    }
+    else
+    {
+        tickets[d].append(QString("%1-%2-%3-%4").arg(r).arg(k).arg(count).arg(n)).append("#");
+    }
+
+    qDebug()<<tickets[d];
+    QString path="D:/OurHomework/bookingSystem/Data/Passengers.xlsx";
+    writeCell(tickets[d],passenger.getIndex(),d+6,d,path,write2);
+}
 void loginPart::buySuccess(int r, int c, int d, int n,int count)
 {
+    if(count<=0)return;
+    if(write->isRunning())
+    {
+        QMessageBox::information(this,"提示","系统繁忙，请稍后再试！");
+        return;
+    }
+    writePT(r,c,d,n,count,"#");
+    writePT2(r,c,d,n,count);
+    writeDT(r,c,d,n,count);
+
+    dia->close();
+    QMessageBox::information(this,"提示","购买成功！");
 
 
 
@@ -347,7 +493,8 @@ void loginPart::on_buttonSearch_clicked()
 void loginPart::on_comeBack_clicked()
 {
 
-    emit openMainWindow();
+//    emit openMainWindow();
+    close();
 }
 
 void loginPart::on_pushButton_2_clicked()

@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->warningText->setVisible(false);
     ui->password->setEchoMode(QLineEdit::Password);
-    connect(&ww,&loginPart::openMainWindow,this,&MainWindow::openAgain);
+//    connect(&ww,&loginPart::openMainWindow,this,&MainWindow::openAgain);
     connect(&mw,&managerPart::comeBack,this,&MainWindow::openAgain);
     //connect(&mw,&managerPart::sendInfo,&ww,&loginPart::initPlaneInfo);
     connect(&ww,&loginPart::sendPlaceAndDate,&mw,&managerPart::getPlaceAndDate);
