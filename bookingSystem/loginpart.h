@@ -28,6 +28,7 @@ public:
     explicit loginPart(QWidget *parent = nullptr);
     ~loginPart();
 
+    QList<QList<QVariant>>allPas;//存储所有乘客信息
 
     QString getCalDate();//获取出发日期
     void showSearchPage(int begin,int end,QString date);//展示售票页面
@@ -87,6 +88,7 @@ private:
     //int timeIndex;
     Passenger passenger;
     QList<QList<QList<QVariant>>> vars;//存储所有航班信息的三维数组
+
     QList<QList<QList<QVariant>>> p_t;
     MyThread *th2;//线程，启动时间和地点的初始化
     MyThread *th3;

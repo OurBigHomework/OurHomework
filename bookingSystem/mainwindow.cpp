@@ -82,11 +82,13 @@ void MainWindow::on_loginButton_clicked()
             QString phone=accountInfo[index][3].toString();
             QString birday=accountInfo[index][4].toString();
             QString sex=accountInfo[index][5].toString();
+            ww.allPas=accountInfo;
             QVector<QString> ticketvec;
             for(int x=6;x<=10;x++)
             {
                 QString ticket=accountInfo[index][x].toString();
                 ticketvec.push_back(ticket);
+
             }
 
             ww.setPassenger(Uname,Pword,birday,sex,rname,phone,index);

@@ -389,25 +389,77 @@ void loginPart::itemClick(ticketItems *it)
           QString path3="D:/OurHomework/bookingSystem/Data/myData2.xlsx";
           QString sk=vars[day][row][col+1].toString();
           QStringList sl=sk.split("-");
-          int cc=sl.at(k-1).toInt()+1;
+          int cc=sl.at(k-1).toInt()+num.toInt();
           int x=(col-3)/2;
           sl.replace(k-1,QString::number(cc));
           QString s3=QString("%1-%2-%3").arg(sl.at(0)).arg(sl.at(1)).arg(sl.at(2));
           QString ss1=QString("%1-%2#").arg(passenger.getIndex()).arg(num);
           QString ss2=QString("%1-%2-%3-%4#").arg(row).arg(x+1).arg(num).arg(k);
-          qDebug()<<tickets[day];
-          qDebug()<<p_t[day][row][x*3+k+1]<<day<< ' '<<row<<' '<<x*3+k+1;
+//          qDebug()<<tickets[day];
+//          qDebug()<<p_t[day][row][x*3+k+1]<<day<< ' '<<row<<' '<<x*3+k+1;
           tickets[day].remove(ss2);
           QString w= p_t[day][row][x*3+k+1].toString().remove(ss1);
           p_t[day][row][x*3+k+1]=QVariant(w);
-          qDebug()<<s3;
-          qDebug()<<tickets[day];
-          qDebug()<<p_t[day][row][x*3+k+1];
-
-          writeCell(w,row,x*3+k+1,day,path1,write);
-          writeCell(tickets[day],passenger.getIndex(),day+6,day,path2,write2);
-          writeCell(s3,row,col+1,day,path3,write3);
           QMessageBox::information(this,"提示","订单取消成功！");
+//          qDebug()<<s3;
+//          qDebug()<<tickets[day];
+//          qDebug()<<p_t[day][row][x*3+k+1];
+
+          QStringList strl=p_t[day][row][x*3+k+1].toString().split("#");
+          QString last=strl.last();
+          if(last.indexOf("%"))
+          {
+
+              QStringList list=last.split("%");
+              for(int i=0;i<list.size()-1;i++)
+              {
+                  QString add= list.at(i);
+                  QStringList psg=add.split("-");
+                  int x1=psg[0].toInt(),x2=psg[1].toInt();
+                  if(x2<=num.toInt())
+                  {
+                      qDebug()<<"候补排队。。。";
+                      QStringList p2;
+                      QVector<int> r2,c2;
+                      w.remove(add+"%");
+                      writeCell(w,row,x*3+k+1,day,path1,write);
+                      p2.push_back(tickets[day]);
+                      r2.push_back(passenger.getIndex());
+                      c2.push_back(day+6);
+                      QString snew=QString("%1-%2-%3-%4#").arg(row).arg(x+1).arg(x2).arg(k);
+                      QString v= allPas[x1][day+6].toString().append(snew);
+                      qDebug()<<v<<x1<<day+6;
+                      p2.push_back(v);
+                      r2.push_back(x1);
+                      c2.push_back(day+6);
+                      write2->setPath(path2);
+                      write2->setInfo(p2,r2,c2,day);
+                      write2->start();
+                      cc-=x2;
+                      sl.replace(k-1,QString::number(cc));
+                      QString z=QString("%1-%2-%3").arg(sl.at(0)).arg(sl.at(1)).arg(sl.at(2));
+                      qDebug()<<"z";
+                      writeCell(z,row,col+1,day,path3,write3);
+                      return;
+                  }
+              }
+
+
+
+
+          }
+
+
+              writeCell(w,row,x*3+k+1,day,path1,write);
+              writeCell(tickets[day],passenger.getIndex(),day+6,day,path2,write2);
+              writeCell(s3,row,col+1,day,path3,write3);
+
+
+
+
+
+
+
        }
 
     }
