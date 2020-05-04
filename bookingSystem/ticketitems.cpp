@@ -15,6 +15,7 @@ void ticketItems::init()
     places=new QLabel(this);
     count=new QLabel(this);
 
+
     pic=new QLabel(this);
     pic->setFixedSize(140,110);
     pic->setStyleSheet("QLabel{background-image:url(:/new/prefix1/ticketImg1.jpg);}");
@@ -26,16 +27,24 @@ void ticketItems::init()
     count->setPalette(color1);
 
 
-    QPalette color2;
-    color2.setColor(QPalette::Text,Qt::black);
+//    QPalette color2;
+    color1.setColor(QPalette::Text,Qt::black);
     planeName->setPalette(color1);
-    time->setPalette(color2);
+    time->setPalette(color1);
+
+    color1.setColor(QPalette::Button,Qt::blue);
+
+    color1.setColor(QPalette::ButtonText,Qt::white);
+
+
     QFont f;
     f.setPointSize(16);
     time->setFont(f);
+
     f.setPointSize(10);
     hasTicket->setFont(f);
     count->setFont(f);
+
 
     pic->move(10,25);
     time->move(160,30);
@@ -49,10 +58,17 @@ void ticketItems::init()
 
 
 
+
+}
+
+QString ticketItems::getCount()
+{
+    return QString( c[1]);
 }
 void ticketItems::setCount(QString c)
 {
     count->setText(c);
+    this->c=c;
 }
 
 QString ticketItems::getTicketsNum()

@@ -16,6 +16,7 @@ public:
     QString getPlaneName();
     QString getPlaces();
     QString getTime();
+    QString getCount();
     int getIndex();
     int getRow();
     int getDayIndex();
@@ -42,11 +43,13 @@ private:
     QLabel*hasTicket;
     QLabel*time;
     QLabel*count;
+
     int index;
     int row;
     int dayIndex;
     QString num;
     QString day;
+    QString c;
 
 
 signals:

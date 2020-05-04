@@ -29,7 +29,7 @@ loginPart::loginPart(QWidget *parent) :
 
     dia=new chooseTicketDialog;
 
-
+    isOrder=false;
 
     pTickets=false;
     qRegisterMetaType <QList<QList<QList<QVariant>>>>("QList<QList<QList<QVariant>>>&");
@@ -221,8 +221,8 @@ void loginPart::writeCell(QString &s1, int r, int c, int d, QString &path,thread
 void loginPart::writePT2(int r, int c, int d, int n, int count)
 {
 
-    QString s=tickets[d];
-    qDebug()<<"d:"<<d<<"\n"<<s;
+//    QString s=tickets[d];
+//    qDebug()<<"d:"<<d<<"\n"<<s;
     int k=(c-1)/2;
     QString q=QString("%1-%2").arg(r).arg(k);
     if(isExist(tickets[d],q,count,2))
@@ -235,7 +235,7 @@ void loginPart::writePT2(int r, int c, int d, int n, int count)
         tickets[d].append(QString("%1-%2-%3-%4").arg(r).arg(k).arg(count).arg(n)).append("#");
     }
 
-    qDebug()<<tickets[d];
+//    qDebug()<<tickets[d];
     QString path="D:/OurHomework/bookingSystem/Data/Passengers.xlsx";
     writeCell(tickets[d],passenger.getIndex(),d+6,d,path,write2);
 }
@@ -361,15 +361,57 @@ void loginPart::initPlaneInfo(QList<QList<QList<QVariant>>>&vars)
 
 void loginPart::itemClick(ticketItems *it)
 {
-
-
     int col=it->getIndex();
     int row=it->getRow();
     int day=it->getDayIndex();
-    QString s=vars[day][row][col+1].toString();
-    QStringList l=s.split("-");
-    dia->init(l.at(0).toInt(),l.at(1).toInt(),l.at(2).toInt(),row,col,day);
-    dia->show();
+
+
+    if(isOrder==false)
+    {
+        QString s=vars[day][row][col+1].toString();
+        QStringList l=s.split("-");
+        dia->init(l.at(0).toInt(),l.at(1).toInt(),l.at(2).toInt(),row,col,day);
+        dia->show();
+    }
+    else
+    {
+       int result=QMessageBox::question(this,"提问","是否取消该订单？");
+       if(result==QMessageBox::Yes)
+       {
+          QString str=it->getPlaneName();
+          QString num=it->getCount();
+          int k=-1;
+          if(str=="一等座")k=1;
+          else if(str=="二等座")k=2;
+          else if(str=="三等座")k=3;
+          QString path1="D:/OurHomework/bookingSystem/Data/PassengersTicketsData.xlsx";
+          QString path2="D:/OurHomework/bookingSystem/Data/Passengers.xlsx";
+          QString path3="D:/OurHomework/bookingSystem/Data/myData2.xlsx";
+          QString sk=vars[day][row][col+1].toString();
+          QStringList sl=sk.split("-");
+          int cc=sl.at(k-1).toInt()+1;
+          int x=(col-3)/2;
+          sl.replace(k-1,QString::number(cc));
+          QString s3=QString("%1-%2-%3").arg(sl.at(0)).arg(sl.at(1)).arg(sl.at(2));
+          QString ss1=QString("%1-%2#").arg(passenger.getIndex()).arg(num);
+          QString ss2=QString("%1-%2-%3-%4#").arg(row).arg(x+1).arg(num).arg(k);
+          qDebug()<<tickets[day];
+          qDebug()<<p_t[day][row][x*3+k+1]<<day<< ' '<<row<<' '<<x*3+k+1;
+          tickets[day].remove(ss2);
+          QString w= p_t[day][row][x*3+k+1].toString().remove(ss1);
+          p_t[day][row][x*3+k+1]=QVariant(w);
+          qDebug()<<s3;
+          qDebug()<<tickets[day];
+          qDebug()<<p_t[day][row][x*3+k+1];
+
+          writeCell(w,row,x*3+k+1,day,path1,write);
+          writeCell(tickets[day],passenger.getIndex(),day+6,day,path2,write2);
+          writeCell(s3,row,col+1,day,path3,write3);
+          QMessageBox::information(this,"提示","订单取消成功！");
+       }
+
+    }
+
 
 
 
@@ -464,7 +506,7 @@ void loginPart::showSearchPage(int begin, int end, QString date)
 
 void loginPart::on_buttonSearch_clicked()
 {
-
+    isOrder=false;
     clearList();
     ui->stackedWidget->setCurrentIndex(1);
     QString begDate=getCalDate();
@@ -518,6 +560,7 @@ void loginPart::on_pushButtonEditOK_clicked()
 
 void loginPart::on_buttonSearchByPlace_clicked()
 {
+    isOrder=false;
     clearList();
     ui->stackedWidget->setCurrentIndex(1);
     ui->titleText->setText("Flight Information");
@@ -588,6 +631,7 @@ void loginPart::on_myTicketsButton_clicked()
 {
     if(pTickets)
     {
+        isOrder=true;
         clearList();
 
         for(int k=0;k<5;k++)
@@ -613,9 +657,12 @@ void loginPart::on_myTicketsButton_clicked()
                         ticketItems *it=new ticketItems(ui->list);
                         it->setTime(vars[k][pindex][tindex*2+1].toString());
                         it->setPlaces(placeInfo);
-                        it->setIndex(pindex);
+                        it->setIndex(tindex*2+1);
                         it->setCount("x"+count);
                         it->setHasTicket(dates[k]);
+                        it->setRow(pindex);
+                        it->setDayIndex(k);
+
                         switch (seat) {
                         case 1:it->setPlaneName("一等座");break;
                         case 2:it->setPlaneName("二等座");break;
@@ -626,6 +673,7 @@ void loginPart::on_myTicketsButton_clicked()
                         QListWidgetItem*item=new QListWidgetItem(ui->list,0);
                         item->setSizeHint(QSize(600,160));
                         ui->list->setItemWidget(item,it);
+                        connect(it,&ticketItems::itemClicked,this,&loginPart::itemClick);
 
                     }
 

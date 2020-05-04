@@ -94,6 +94,7 @@ private:
     threadWriteCell*write2;
     threadWriteCell*write3;
     bool pTickets;
+    bool isOrder;
     QVector<QString> tickets;
 
     chooseTicketDialog*dia;
