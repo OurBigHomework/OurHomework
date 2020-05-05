@@ -126,7 +126,7 @@ background-color: rgb(240, 240, 247);</string>
 color:white;</string>
              </property>
              <property name="text">
-              <string>click to change</string>
+              <string>修改头像</string>
              </property>
             </widget>
            </item>
@@ -185,7 +185,7 @@ color:white;</string>
 color:white;</string>
         </property>
         <property name="text">
-         <string>Modify flight information</string>
+         <string>修改航班信息</string>
         </property>
        </widget>
       </item>
@@ -205,7 +205,7 @@ color:white;</string>
 color:white;</string>
         </property>
         <property name="text">
-         <string>back</string>
+         <string>返回</string>
         </property>
        </widget>
       </item>
@@ -301,7 +301,7 @@ background-color: rgb(255, 255, 255);
 </string>
             </property>
             <property name="text">
-             <string>Welcome to the booking management system!</string>
+             <string>欢迎来到航班订票系统管理界面！</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>

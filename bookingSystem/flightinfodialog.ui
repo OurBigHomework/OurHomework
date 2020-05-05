@@ -416,7 +416,7 @@ color:rgb(255, 255, 255);</string>
                <family>Candara</family>
                <pointsize>18</pointsize>
                <weight>75</weight>
-               <italic>true</italic>
+               <italic>false</italic>
                <bold>true</bold>
               </font>
              </property>
@@ -425,7 +425,7 @@ color:rgb(255, 255, 255);</string>
 color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
-              <string>Search</string>
+              <string>航班信息修改</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -614,7 +614,7 @@ color: rgb(59, 45, 141);
                 </font>
                </property>
                <property name="text">
-                <string>Starting Station:</string>
+                <string>起点</string>
                </property>
               </widget>
              </item>
@@ -632,7 +632,7 @@ color: rgb(59, 45, 141);
                 <string notr="true"/>
                </property>
                <property name="text">
-                <string>Terminal:</string>
+                <string>终点</string>
                </property>
               </widget>
              </item>
@@ -647,7 +647,7 @@ color: rgb(59, 45, 141);
                 </font>
                </property>
                <property name="text">
-                <string>Date</string>
+                <string>日期</string>
                </property>
               </widget>
              </item>
@@ -691,7 +691,7 @@ color: rgb(59, 45, 141);
 color:white;</string>
             </property>
             <property name="text">
-             <string>OK</string>
+             <string>确定</string>
             </property>
            </widget>
           </item>

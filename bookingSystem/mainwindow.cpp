@@ -13,18 +13,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->warningText->setVisible(false);
     ui->password->setEchoMode(QLineEdit::Password);
-//    connect(&ww,&loginPart::openMainWindow,this,&MainWindow::openAgain);
+    setWindowIcon(QIcon(":/new/prefix1/plane3.png"));
     connect(&mw,&managerPart::comeBack,this,&MainWindow::openAgain);
-    //connect(&mw,&managerPart::sendInfo,&ww,&loginPart::initPlaneInfo);
     connect(&ww,&loginPart::sendPlaceAndDate,&mw,&managerPart::getPlaceAndDate);
 
     QElapsedTimer timer;
     timer.start();
     excel.setPath("D:/OurHomework/bookingSystem/Data/Passengers.xlsx");
-//    QVariant v1=excel.readAll(1);
-//    excel.excelToQList(v1,accountInfo);
-//    QVariant v2=excel.readAll(2);
-//    excel.excelToQList(v2,indexInfo);
     QList<QList<QList<QVariant>>> mylist;
     excel.readAllSheet(mylist);
     accountInfo=mylist[0];
@@ -36,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
-void MainWindow::paintEvent(QPaintEvent *event)
+void MainWindow::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
     p.drawPixmap(rect(),QPixmap(":/new/prefix1/sky6.jpg"));
@@ -173,11 +168,5 @@ bool MainWindow::accountExist(QString pword, QString uname,int& index)
 
 //if(pword=="123"&&uname=="haha")return true;
 //else return false;
-
-}
-void MainWindow::on_registerButton_clicked()
-{
-    hide();
-    w.showMaximized();
 
 }

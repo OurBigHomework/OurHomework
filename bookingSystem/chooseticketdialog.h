@@ -16,7 +16,7 @@ class chooseTicketDialog : public QDialog
 public:
     explicit chooseTicketDialog(QWidget *parent = nullptr);
     ~chooseTicketDialog();
-    void init(int a,int b,int c,int row,int col,int day);
+    void init(int a,int b,int c,int row,int col,int day);//初始化
 
     void changeText(int n,QPushButton*l);
     void buyTickets(QLabel*btn,QSpinBox*box,int k);

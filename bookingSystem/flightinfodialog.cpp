@@ -10,17 +10,19 @@ FlightInfoDialog::FlightInfoDialog(QWidget *parent) :
     ui(new Ui::FlightInfoDialog)
 {
     ui->setupUi(this);
+    setWindowIcon(QIcon(":/new/prefix1/plane3.png"));
     e.setPath("D:/OurHomework/bookingSystem/Data/myData2.xlsx");
-    QList<QVariant> varList;
-    int c=e.sheetCount();
-    for(int i=0;i<c;i++)
-    {
-        varList.push_back(e.readAll(i+1));
-        QList<QList<QVariant>> r;
-        e.excelToQList(varList[i],r);
-        vars.push_back(r);
+    e.readAllSheet(vars);
+//    QList<QVariant> varList;
+//    int c=e.sheetCount();//
+//    for(int i=0;i<c;i++)
+//    {
+//        varList.push_back(e.readAll(i+1));
+//        QList<QList<QVariant>> r;
+//        e.excelToQList(varList[i],r);
+//        vars.push_back(r);
 
-    }
+//    }
 connect(&w,&threadWriteCell::writeOk,this,&FlightInfoDialog::dealWriteOk);
 }
 
@@ -34,14 +36,14 @@ void FlightInfoDialog::changePage(int i)
     ui->stackedWidget->setCurrentIndex(i);
 }
 
-void FlightInfoDialog::dealWriteOk()
+void FlightInfoDialog::dealWriteOk()//修改成功后线程停止
 {
     w.quit();
     w.wait();
 
 }
 
-void FlightInfoDialog::initChangePage(QString &t, QString &t1, QString &t2, QString &t3)
+void FlightInfoDialog::initChangePage(QString &t, QString &t1, QString &t2, QString &t3)//初始化界面
 {
     ui->time->setText(t);
     ui->ticket_1->setText(t1);
@@ -49,7 +51,7 @@ void FlightInfoDialog::initChangePage(QString &t, QString &t1, QString &t2, QStr
     ui->ticket_3->setText(t3);
 }
 
-int FlightInfoDialog::dateCorrect(QString d)
+int FlightInfoDialog::dateCorrect(QString d)//判断查找日期
 {
 
 
@@ -63,12 +65,13 @@ int FlightInfoDialog::dateCorrect(QString d)
     if(m<10)mm="0"+mm;
     if(dd<10)ddd="0"+ddd;
     d=QString("%1-%2-%3").arg(y).arg(mm).arg(ddd);
-
+    //若日期在航班开放日期范围内，则返回日期索引
     for(int i=0;i<dates.size();i++)
     {
 
         if(dates[i].left(10)==d)return i;
     }
+    //判断是否闰年
     if((y%4==0&&y%100!=0)||y%400==0)
     {
         if(m==2&&dd>29)return -1;
@@ -121,64 +124,29 @@ void FlightInfoDialog::dealDone(QList<QList<QList<QVariant>>>&vars)
      }
 
  }
-/*
- * void FlightInfoDialog::on_buttonOk_clicked()
-{
-    QString bPlace=ui->beginBox->currentText();
-    QString ePlace=ui->endBox->currentText();
-    if(bPlace==ePlace)
-    {
-        QMessageBox::information(this,"Warning","The starting and ending points can't be the same.");
-    }
-    QString date=QString("%1-%2-%3").arg(ui->yearBox->text()).arg(ui->monthBox->text()).arg(ui->dayBox->text());
-    int k=dateCorrect(date);
-    if(k==-1)
-    {
-        QMessageBox::information(this,"Warning","Wrong enter date!");
-    }else if(k==-2)
-    {
-        QMessageBox::information(this,"Tips","Tickets not open on current date!Please re-select the date. ");
-    }else
-    {
-
-        //QVariant v=e.readAll((k+1));
-
-        int q1=-1,q2=-1;
-        for(int i=0;i<places.size();i++)
-        {
-            if(bPlace==places[i])q1=i;
-            if(ePlace==places[i])q2=i;
-            if(q1!=-1&&q2!=-1)break;
-        }
-
-
-    }
-    qDebug()<<bPlace<<ePlace<<date;
-}
- *
- */
 
 
 void FlightInfoDialog::on_buttonOk_2_clicked()
 {
-    QString bPlace=ui->beginBox_2->currentText();
-    QString ePlace=ui->endBox_2->currentText();
+    QString bPlace=ui->beginBox_2->currentText();//起点
+    QString ePlace=ui->endBox_2->currentText();//终点
     if(bPlace==ePlace)
     {
-        QMessageBox::information(this,"Warning","The starting and ending points can't be the same.");
+        QMessageBox::information(this,"警告","起点和终点不能相同！");
         return;
     }
+    //日期
     QString date=QString("%1-%2-%3").arg(ui->yearBox_2->text()).arg(ui->monthBox_2->text()).arg(ui->dayBox_2->text());
-    int k=dateCorrect(date);
+    int k=dateCorrect(date);//判断日期是否符合实际
     if(k==-1)
     {
-        QMessageBox::information(this,"Warning","Wrong enter date!");
+        QMessageBox::information(this,"警告","日期不存在!");
     }else if(k==-2)
     {
-        QMessageBox::information(this,"Tips","Tickets not open on current date!Please re-select the date. ");
+        QMessageBox::information(this,"提示","该日期航班尚未开放，请重新选择日期！");
     }else
     {
-        int q1=-1,q2=-1;
+        int q1=-1,q2=-1;//q1为起点索引，q2为终点索引
         for(int i=0;i<places.size();i++)
         {
             if(bPlace==places[i])q1=i;
@@ -191,10 +159,10 @@ void FlightInfoDialog::on_buttonOk_2_clicked()
             qq1=q1;
             qq2=q2;
             dd=date;
-            emit Search(q1,q2,date,vars[k]);
+            emit Search(q1,q2,date,vars[k]);//向managerpart传递信号
             close();
         }else{
-            QMessageBox::information(this,"Tips","Please wait for a minute.The system is initializing...");
+            QMessageBox::information(this,"提示","请稍等，系统正在初始化中...");
         }
 
 
@@ -218,13 +186,14 @@ void FlightInfoDialog::on_buttonChangeYes_clicked()
     rows.push_back(line);
     cols.push_back(currentTimeIndex);
     cols.push_back(currentTimeIndex+1);
-    qDebug()<<"line:"<<line<<"time:"<<currentTimeIndex;
+//    qDebug()<<"line:"<<line<<"time:"<<currentTimeIndex;
     QStringList l;
     l<<t<<num;
 //    ex->writeCell(l,rows,cols,sheetNum);
     vars[sheetNum][line][currentTimeIndex]=QVariant(t);
     vars[sheetNum][line][currentTimeIndex+1]=QVariant(num);
-    qDebug()<<vars[sheetNum][line][currentTimeIndex]<<vars[sheetNum][line][currentTimeIndex+1]<<"hh-240";
+//    qDebug()<<vars[sheetNum][line][currentTimeIndex]<<vars[sheetNum][line][currentTimeIndex+1]<<"hh-240";
+    //开启线程，修改excel文件中的信息
     w.setPath("D:/OurHomework/bookingSystem/Data/myData2.xlsx");
     w.setInfo(l,rows,cols,sheetNum);
     w.start();

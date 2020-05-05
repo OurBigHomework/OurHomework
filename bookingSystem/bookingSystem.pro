@@ -27,7 +27,6 @@ SOURCES += \
     myexcel.cpp \
     mythread.cpp \
     passenger.cpp \
-    registerpart.cpp \
     threadwritecell.cpp \
     ticketitems.cpp
 
@@ -41,7 +40,6 @@ HEADERS += \
     myexcel.h \
     mythread.h \
     passenger.h \
-    registerpart.h \
     threadwritecell.h \
     ticketitems.h
 
@@ -50,8 +48,7 @@ FORMS += \
     flightinfodialog.ui \
     loginpart.ui \
     mainwindow.ui \
-    managerpart.ui \
-    registerpart.ui
+    managerpart.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

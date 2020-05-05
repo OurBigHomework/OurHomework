@@ -12,7 +12,7 @@ loginPart::loginPart(QWidget *parent) :
     ui->setupUi(this);
     ui->stackedWidget->setFrameShape(QFrame::NoFrame);
     ui->titleText->setFrameShape(QFrame::NoFrame);
-    setWindowIcon(QIcon(":/new/prefix1/plane1.png"));
+    setWindowIcon(QIcon(":/new/prefix1/plane3.png"));
     ui->stackedWidget->setCurrentIndex(0);
 
     th2=new MyThread;
@@ -281,12 +281,12 @@ void loginPart::initPersonalInfo(QVector<QString>&t)
 {
     ui->stackedWidget->setCurrentIndex(0);
     ui->labelName->setText( passenger.getUsername());
-    ui->Username->setText(QString("Username:").append(passenger.getUsername()));
-    ui->Name->setText(QString("Name:").append(passenger.getName()));
-    ui->Birthday->setText(QString("Birthday:").append(passenger.getBirthday().left(10)));
-    ui->Sex->setText(QString("Sex:").append(passenger.getSex()));
-    ui->MobilePhone->setText(QString("MobilePhone:").append(passenger.getPhone()));
-    ui->Password->setText(QString("Password:").append(passenger.getPassword()));
+    ui->Username->setText(QString("用户名:").append(passenger.getUsername()));
+    ui->Name->setText(QString("真实姓名:").append(passenger.getName()));
+    ui->Birthday->setText(QString("生日:").append(passenger.getBirthday().left(10)));
+    ui->Sex->setText(QString("性别:").append(passenger.getSex()));
+    ui->MobilePhone->setText(QString("手机号码:").append(passenger.getPhone()));
+    ui->Password->setText(QString("密码:").append(passenger.getPassword()));
     tickets=t;
     pTickets=true;
 }
@@ -496,7 +496,7 @@ void loginPart::showSearchPage(int begin, int end, QString date)
 
     if(vars.isEmpty())
     {
-        QMessageBox::information(this,"Tips:","数据正在加载中，请稍后。。。");
+        QMessageBox::information(this,"提示:","数据正在加载中，请稍后。。。");
         return;
     }
     int flag=-1;
@@ -512,7 +512,7 @@ void loginPart::showSearchPage(int begin, int end, QString date)
     }
     if(flag==-1)
     {
-        QMessageBox::information(this,"Tips","Tickets not open on current date.Please re-select the date.");
+        QMessageBox::information(this,"提示","该日期航班尚未开放，请重新选择航班。");
     }
     else
     {
@@ -546,7 +546,7 @@ void loginPart::showSearchPage(int begin, int end, QString date)
                 QListWidgetItem*item=new QListWidgetItem(ui->list,0);
                 item->setSizeHint(QSize(600,160));
                 ui->list->setItemWidget(item,it);
-                ui->titleText->setText("Flight Information");
+
                 connect(it,&ticketItems::itemClicked,this,&loginPart::itemClick);
 
             }
@@ -561,12 +561,13 @@ void loginPart::on_buttonSearch_clicked()
     isOrder=false;
     clearList();
     ui->stackedWidget->setCurrentIndex(1);
+    ui->titleText->setText("航班信息");
     QString begDate=getCalDate();
     QString begPlace=ui->start->currentText();
     QString endPlace=ui->end->currentText();
     if(begPlace==endPlace)
     {
-        QMessageBox::information(this,"Warning","Start and end cannot be the same");
+        QMessageBox::information(this,"警告","起点和终点不能相同！");
         return;
     }
 
@@ -594,7 +595,7 @@ void loginPart::on_comeBack_clicked()
 void loginPart::on_pushButton_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
-    ui->titleText->setText("Personal Information");
+    ui->titleText->setText("个人信息");
 }
 
 void loginPart::on_pushButtonEdit_clicked()
@@ -615,13 +616,13 @@ void loginPart::on_buttonSearchByPlace_clicked()
     isOrder=false;
     clearList();
     ui->stackedWidget->setCurrentIndex(1);
-    ui->titleText->setText("Flight Information");
+    ui->titleText->setText("航班信息");
 
     QString begPlace=ui->start_2->currentText();
     QString endPlace=ui->end_2->currentText();
     if(begPlace==endPlace)
     {
-        QMessageBox::information(this,"Warning","Start and end cannot be the same");
+        QMessageBox::information(this,"警告","起点和终点不能相同");
         return;
     }
 
@@ -636,7 +637,7 @@ void loginPart::on_buttonSearchByPlace_clicked()
     }
     if(vars.isEmpty())
     {
-        QMessageBox::information(this,"Tips:","数据正在加载中，请稍后。。。");
+        QMessageBox::information(this,"提示:","数据正在加载中，请稍后。。。");
         return;
     }
     int line=a*place.size()+b+1;
@@ -685,7 +686,7 @@ void loginPart::on_myTicketsButton_clicked()
     {
         isOrder=true;
         clearList();
-
+        ui->titleText->setText("我的订单");
         for(int k=0;k<5;k++)
         {
             QStringList tk=tickets[k].split("#");

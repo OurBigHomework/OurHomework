@@ -23,8 +23,8 @@ public:
     int sheetNum;
     int currentTimeIndex;//修改界面时间在excel表里面的列位置
     int line;//修改的item在excel表里面的行位置
-    void changePage(int i);
-    int dateCorrect(QString d);
+    void changePage(int i);//界面转换
+    int dateCorrect(QString d);//检查日期
     void dealDone(QList<QList<QList<QVariant>>>&vars);
     void initPlaceAndDate(QVector<QString> &place, QVector<QString> &dates);
     void initChangePage(QString&t,QString&t1,QString&t2,QString&t3);

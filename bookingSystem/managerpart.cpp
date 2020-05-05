@@ -12,6 +12,7 @@ managerPart::managerPart(QWidget *parent) :
     ui->setupUi(this);
      qRegisterMetaType <QList<QList<QList<QVariant>>>>("QList<QList<QList<QVariant>>>&");
     connect(&dia,&FlightInfoDialog::Search,this,&managerPart::showSearchPage);
+    setWindowIcon(QIcon(":/new/prefix1/plane3.png"));
     //connect(&dia,&FlightInfoDialog::send,this,&managerPart::getInfo);
 
 }
@@ -33,15 +34,6 @@ void managerPart::getInfo(QList<QList<QList<QVariant> > > &vars)
     emit sendInfo(vars);
 
 }
-
-//QString managerPart::formateStr(QString &str, int k)
-//{
-//    while (str.size()<k) {
-//        str.append(" ");
-
-//    }
-//    return str;
-//}
 
 void managerPart::showSearchPage(int begin, int end,QString&date, QList<QList<QVariant>>&res)
 {

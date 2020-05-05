@@ -6,7 +6,7 @@ chooseTicketDialog::chooseTicketDialog(QWidget *parent) :
     ui(new Ui::chooseTicketDialog)
 {
     ui->setupUi(this);
-    setWindowTitle("Choose");
+    setWindowTitle("选择");
     setWindowIcon(QIcon(":/new/prefix1/plane3.png"));
 }
 
@@ -17,10 +17,10 @@ chooseTicketDialog::~chooseTicketDialog()
 
 void chooseTicketDialog::init(int a, int b, int c,int row,int col,int day)
 {
-    ui->num1->setText(QString::number(a));
+    ui->num1->setText(QString::number(a));//设置余票额
     ui->num2->setText(QString::number(b));
     ui->num3->setText(QString::number(c));
-    changeText(a,ui->buy1);
+    changeText(a,ui->buy1);//设置按钮文本
     changeText(b,ui->buy2);
     changeText(c,ui->buy3);
     Row=row;
@@ -28,7 +28,7 @@ void chooseTicketDialog::init(int a, int b, int c,int row,int col,int day)
     Day=day;
 
 }
-
+//设置按钮文本
 void chooseTicketDialog::changeText(int n,QPushButton*l)
 {
    if(n>0)
@@ -43,18 +43,18 @@ void chooseTicketDialog::changeText(int n,QPushButton*l)
 
 void chooseTicketDialog::buyTickets(QLabel*btn,QSpinBox*box,int k)
 {
-    int num=btn->text().toInt();
-    int count=box->value();
-    if(num==0)
+    int num=btn->text().toInt();//获得余票数
+    int count=box->value();//获得用户所要购买的数量
+    if(num==0)//若余票数为0，发送无票信号
     {
         emit noTicket(Row,Col,Day,k,count);
 
     }
-    else if(count>num)
+    else if(count>num)//若用户所要购买的票的数量大于余票量，发送购票失败信号
     {
         emit fail();
     }
-    else
+    else//否则，发送购票成功信号
     {
         emit success(Row,Col,Day,k,count);
     }
