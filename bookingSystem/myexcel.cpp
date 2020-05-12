@@ -178,6 +178,7 @@ void myExcel::setDate(QString date)
 
 void myExcel::writeCell(QStringList str, QVector<int>row, QVector<int>col,int n)
 {
+    //构造excel列索引
     QString str1="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     QStringList strList;
     int m=0;
@@ -198,12 +199,13 @@ void myExcel::writeCell(QStringList str, QVector<int>row, QVector<int>col,int n)
 
     m++;
     }
-
+    //判断数据合法性
     if((row.size()!=col.size())||(row.size()!=str.size()))
     {
         qDebug()<<"row!=col!=str";
         return;
     }
+    //打开excel表格
     QAxObject excel("Excel.Application");
     excel.setProperty("Visible",false);
     QAxObject *workbooks = excel.querySubObject("WorkBooks");
@@ -216,7 +218,7 @@ void myExcel::writeCell(QStringList str, QVector<int>row, QVector<int>col,int n)
     for(int i=0;i<s;i++)
     {
         int c=col[i],r=row[i];
-        QString a=strList[c]+QString::number(r+1);
+        QString a=strList[c]+QString::number(r+1);//将数组下标转化为excel中的索引
         qDebug()<<"a:"<<a;
         QAxObject*write=worksheet->querySubObject("Range(Qvariant,QVariant)",a);
         write->dynamicCall("SetValue(const QVariant&)",QVariant(str.at(i)));

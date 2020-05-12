@@ -10,6 +10,7 @@ managerPart::managerPart(QWidget *parent) :
     ui(new Ui::managerPart)
 {
     ui->setupUi(this);
+    setWindowTitle("管理员界面");
      qRegisterMetaType <QList<QList<QList<QVariant>>>>("QList<QList<QList<QVariant>>>&");
     connect(&dia,&FlightInfoDialog::Search,this,&managerPart::showSearchPage);
     setWindowIcon(QIcon(":/new/prefix1/plane3.png"));

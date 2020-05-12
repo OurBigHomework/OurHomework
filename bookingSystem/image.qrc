@@ -29,6 +29,8 @@
         <file>sky2.jpg</file>
         <file>sky5.png</file>
         <file>sky6.jpg</file>
+        <file>Mhead2.jpg</file>
+        <file>Mhead3.jpg</file>
     </qresource>
     <qresource prefix="/">
         <file>../image/sky.jpg</file>

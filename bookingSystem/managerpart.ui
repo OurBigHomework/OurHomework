@@ -92,7 +92,7 @@ background-color: rgb(240, 240, 247);</string>
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="image.qrc">:/new/prefix1/Mhead.jpg</pixmap>
+              <pixmap resource="image.qrc">:/new/prefix1/Mhead3.jpg</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>
@@ -270,6 +270,7 @@ background-color: rgba(78, 99, 189,220);</string>
 background-color: rgb(255, 255, 255);
 
 
+
 </string>
         </property>
         <widget class="QWidget" name="Fpage">
@@ -301,7 +302,7 @@ background-color: rgb(255, 255, 255);
 </string>
             </property>
             <property name="text">
-             <string>欢迎来到航班订票系统管理界面！</string>
+             <string>欢迎来到航空客运订票系统管理员界面！</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -311,6 +312,11 @@ background-color: rgb(255, 255, 255);
          </layout>
         </widget>
         <widget class="QWidget" name="page_2">
+         <property name="styleSheet">
+          <string notr="true">QWidget#page_2{
+	background-color: rgb(255, 255, 255);
+}</string>
+         </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <property name="spacing">
            <number>0</number>

@@ -13,6 +13,7 @@ loginPart::loginPart(QWidget *parent) :
     ui->stackedWidget->setFrameShape(QFrame::NoFrame);
     ui->titleText->setFrameShape(QFrame::NoFrame);
     setWindowIcon(QIcon(":/new/prefix1/plane3.png"));
+    setWindowTitle("用户界面");
     ui->stackedWidget->setCurrentIndex(0);
 
     th2=new MyThread;
@@ -401,6 +402,7 @@ void loginPart::itemClick(ticketItems *it)
           QString w= p_t[day][row][x*3+k+1].toString().remove(ss1);
           p_t[day][row][x*3+k+1]=QVariant(w);
           QMessageBox::information(this,"提示","订单取消成功！");
+          ui->stackedWidget->setCurrentIndex(0);
 //          qDebug()<<s3;
 //          qDebug()<<tickets[day];
 //          qDebug()<<p_t[day][row][x*3+k+1];
@@ -422,6 +424,7 @@ void loginPart::itemClick(ticketItems *it)
                       QStringList p2;
                       QVector<int> r2,c2;
                       w.remove(add+"%");
+                      w.append(add+"#");
                       writeCell(w,row,x*3+k+1,day,path1,write);
                       p2.push_back(tickets[day]);
                       r2.push_back(passenger.getIndex());
@@ -438,7 +441,7 @@ void loginPart::itemClick(ticketItems *it)
                       cc-=x2;
                       sl.replace(k-1,QString::number(cc));
                       QString z=QString("%1-%2-%3").arg(sl.at(0)).arg(sl.at(1)).arg(sl.at(2));
-                      qDebug()<<"z";
+                      qDebug()<<z;
                       writeCell(z,row,col+1,day,path3,write3);
                       return;
                   }

@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->warningText->setVisible(false);
     ui->password->setEchoMode(QLineEdit::Password);
     setWindowIcon(QIcon(":/new/prefix1/plane3.png"));
+    setWindowTitle("用户登录");
     connect(&mw,&managerPart::comeBack,this,&MainWindow::openAgain);
     connect(&ww,&loginPart::sendPlaceAndDate,&mw,&managerPart::getPlaceAndDate);
 

@@ -179,6 +179,11 @@ void FlightInfoDialog::on_buttonChangeYes_clicked()
     QString tn2=ui->ticket_2->text();
     QString tn3=ui->ticket_3->text();
     QString num=QString("%1-%2-%3").arg(tn1).arg(tn2).arg(tn3);
+    if(tn1.toInt()<0||tn2.toInt()<0||tn3.toInt()<0)
+    {
+        QMessageBox::information(this,"警告","非法数据输入！");
+        return;
+    }
 //    myExcel*ex=new myExcel;
 //    ex->setPath("D:/OurHomework/bookingSystem/Data/myData2.xlsx");
     QVector<int>rows,cols;//修改界面时间、票的索引
